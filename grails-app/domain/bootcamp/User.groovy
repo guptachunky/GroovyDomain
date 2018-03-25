@@ -16,8 +16,8 @@ class User {
     Boolean admin
     Boolean active
 
-//    static hasMany = [topic:Topic]
-//    static hasMany=[subscription:Subscription]
+    static hasMany = [topics:Topic, subscriptions:Subscription,readingItems:ReadingItem, resources:Resource]
+
     static constraints = {
 
         emailId(unique: true, email: true, blank: false)
@@ -34,4 +34,26 @@ class User {
 
 
     }
+
+
+    def afterInsert() {
+        log.info "----------Into After Insert------"
+    }
+
+    def beforeInsert() {
+        log.info "----------Into before Insert------"
+    }
+
+    def beforeValidate() {
+
+//        Ques fourth
+        if (User.count() == 0) {
+            return true
+        } else {
+            return false
+        }
+
+    }
+
+
 }

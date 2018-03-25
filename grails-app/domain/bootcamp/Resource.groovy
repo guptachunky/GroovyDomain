@@ -7,6 +7,9 @@ class Resource {
     String description
     Date dateCreated
     Date dateUpdated
+
+    static belongsTo = [user: User]
+    static hasMany = [ratings: RatingResource, readingItems: ReadingItem]
     static constraints = {
     }
 }
