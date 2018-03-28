@@ -1,15 +1,16 @@
 package bootcamp
 
-class Resource {
+abstract class Resource {
 
-    User createdBy
-    Topic topic
     String description
     Date dateCreated
-    Date dateUpdated
+    Date lastUpdated
 
-    static belongsTo = [user: User]
+    static belongsTo = [user: User, topic: Topic]
+
     static hasMany = [ratings: RatingResource, readingItems: ReadingItem]
+
     static constraints = {
+        description(type: 'text')
     }
 }

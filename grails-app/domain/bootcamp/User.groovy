@@ -1,8 +1,5 @@
 package bootcamp
 
-import com.mysql.jdbc.Blob
-
-
 class User {
 
     String firstName
@@ -10,13 +7,13 @@ class User {
     String emailId
     String password
     String userName
-    byte[] photo
+    byte photo
     Date dateCreated
     Date dateUpdated
     Boolean admin
     Boolean active
 
-    static hasMany = [topics:Topic, subscriptions:Subscription,readingItems:ReadingItem, resources:Resource]
+    static hasMany = [topics: Topic, subscriptions: Subscription, resources: Resource]
 
     static constraints = {
 
@@ -26,7 +23,7 @@ class User {
         firstName(nullable: false, blank: false)
         password(nullable: false)
         userName(nullable: true, unique: true)
-        photo(nullable: true,)
+        photo(nullable: true, sqlType: 'longBlob')
         dateCreated(nullable: true)
         admin(nullable: true)
         active(nullable: true)
@@ -37,21 +34,21 @@ class User {
 
 
     def afterInsert() {
-        log.info "----------Into After Insert------"
+//        log.info "----------Into After Insert------"
     }
 
     def beforeInsert() {
-        log.info "----------Into before Insert------"
+//        log.info "----------Into before Insert------"
     }
 
     def beforeValidate() {
 
 //        Ques fourth
-        if (User.count() == 0) {
-            return true
-        } else {
-            return false
-        }
+//        if (User.count() == 0) {
+//            return true
+//        } else {
+//            return false
+//        }
 
     }
 

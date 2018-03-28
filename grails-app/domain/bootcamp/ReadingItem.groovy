@@ -2,17 +2,15 @@ package bootcamp
 
 class ReadingItem {
 
-    User createdBy
     Boolean isRead
-    Resource resource
     Date dateCreated
-    Date dateUpdated
+    Date lastUpdated
 
-    static belongsTo = [user: User]
+    static belongsTo = [user: User, resource: Resource]
 
 
     static constraints = {
-        createdBy(nullable: false)
+        user(nullable: false, unique: "resource")
         resource(blank: false, nullable: false, unique: 'user')
         isRead(nullable: false)
     }

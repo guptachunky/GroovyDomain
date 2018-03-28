@@ -2,15 +2,15 @@ package bootcamp
 
 class RatingResource {
 
-    Resource resource
-    User createdBy
     Integer score
     Date dateCreated
-    Date dateUpdated
+    Date lastUpdated
+    static belongsTo = [user: User, resource: Resource]
     static constraints = {
         resource(nullable: false)
-        createdBy(nullable: false)
-        score(nullable: false , min: 1,max: 5)
-
+        user(nullable: false)
+        score(validator: {
+            return it >= 1 && it <= 5
+        })
     }
 }

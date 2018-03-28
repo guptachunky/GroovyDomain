@@ -2,12 +2,18 @@
 grails:
     profile: web
     codegen:
-        defaultPackage: grailsdomainassignment
+        defaultPackage: linksharing
     gorm:
         reactor:
             # Whether to translate GORM events into Reactor events
             # Disabled by default for performance reasons
             events: false
+
+
+server:
+    contextPath: /grails-app/
+
+
 info:
     app:
         name: '@info.app.name@'

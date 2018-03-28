@@ -9,25 +9,36 @@ class Topic {
     static belongsTo = [createdBy: User]
     Date dateCreated
     Date lastUpdated
+    Visibility visibility
 
     static hasMany = [subscriptions: Subscription, resources: Resource]
-    Visibility visibility
+
 
     static constraints = {
 
         name(unique: 'createdBy', blank: false, nullable: false)
-        visibility(nullable: true)
+        visibility(nullable: false)
         createdBy(nullable: false)
 
     }
 
-    def afterInsert() {
-        Topic.withNewSession {
-            Subscription subscription = new Subscription()
-            subscription.setTopic("topic name")
-            subscription.setSeriousness(Seriousness.Casual)
-
-            userInvitation.save()
-        }
-    }
+//
+//    def afterInsert() {
+//        Topic.withNewSession {
+//
+//            println(this.name)
+//            Subscription subscription = new Subscription()
+//            subscription.setTopic(this)
+//            subscription.setCreatedBy(this.createdBy)
+//            subscription.setSeriousness(Seriousness.Casual)
+//            if(subscription.save(flush:true)){
+//                log.info "Subscription ${subscription} saved successfully"
+//            }
+//            else
+//            {
+//                log.error "Error saving subscription : ${subscription.errors.allErrors}"
+//            }
+//
+//        }
+//    }
 }

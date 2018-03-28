@@ -1,10 +1,10 @@
 package bootcamp
 
-class DocumentResouce {
+class DocumentResouce extends Resource {
 
     String filePath
     Date dateCreated
-    Date dateUpdated
+    Date lastUpdated
 
     static constraints = {
 
