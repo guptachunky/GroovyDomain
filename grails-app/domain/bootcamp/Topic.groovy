@@ -13,32 +13,33 @@ class Topic {
 
     static hasMany = [subscriptions: Subscription, resources: Resource]
 
-
     static constraints = {
 
-        name(unique: 'createdBy', blank: false, nullable: false)
+        name(blank: false, nullable: false, unique: "createdBy")
         visibility(nullable: false)
-        createdBy(nullable: false)
-
     }
 
-//
-//    def afterInsert() {
-//        Topic.withNewSession {
-//
-//            println(this.name)
-//            Subscription subscription = new Subscription()
-//            subscription.setTopic(this)
-//            subscription.setCreatedBy(this.createdBy)
-//            subscription.setSeriousness(Seriousness.Casual)
-//            if(subscription.save(flush:true)){
-//                log.info "Subscription ${subscription} saved successfully"
-//            }
-//            else
-//            {
-//                log.error "Error saving subscription : ${subscription.errors.allErrors}"
-//            }
-//
-//        }
-//    }
+    def afterInsert() {
+        Topic.withNewSession {
+
+            println(this.name)
+            Subscription subscription = new Subscription()
+            subscription.setTopic(this)
+            subscription.setUser(this.createdBy)
+            subscription.setSeriousness(Seriousness.Casual)
+            if (subscription.save(flush: true)) {
+                log.info "Subscription ${subscription} saved successfully"
+            } else {
+                log.error "Error saving subscription : ${subscription.errors.allErrors}"
+            }
+
+        }
+    }
+
+    @Override
+    String toString() {
+        return "Topic{" +
+                "name='" + name + '\'' +
+                '}'
+    }
 }

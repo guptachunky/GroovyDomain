@@ -10,7 +10,7 @@ class ReadingItem {
 
 
     static constraints = {
-        user(nullable: false, unique: "resource")
+        user(nullable: false)
         resource(blank: false, nullable: false, unique: 'user')
         isRead(nullable: false)
     }

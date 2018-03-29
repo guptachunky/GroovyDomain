@@ -7,7 +7,7 @@ class User {
     String emailId
     String password
     String userName
-    byte photo
+    byte[] photo
     Date dateCreated
     Date dateUpdated
     Boolean admin
@@ -50,6 +50,12 @@ class User {
 //            return false
 //        }
 
+    }
+
+
+    @Override
+    String toString() {
+        return "User = ${userName}"
     }
 
 

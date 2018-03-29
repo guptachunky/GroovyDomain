@@ -2,6 +2,7 @@ package grailsdomainassignment
 
 import bootcamp.DocumentResouce
 import bootcamp.LinkResource
+import bootcamp.ReadingItem
 import bootcamp.Resource
 import bootcamp.Subscription
 import bootcamp.Topic
@@ -13,10 +14,8 @@ class BootStrap {
 
     def init = { servletContext ->
 
-        println "srat"
+        //        AppConstants.PASSWORD
 
-//        AppConstants.PASSWORD
-//
 //        5.times {
 //            User normal = new User()
 //            normal.setEmailId("chunks@gmail.com${it}")
@@ -27,24 +26,69 @@ class BootStrap {
 //            normal.setActive(true)
 //            normal.setAdmin(false)
 //            normal.validate()
-//            log.error(normal.errors.allErrors)
 //            println normal.save(validate: false)
 //
 //        }
 //
-//
+//        User normal = new User()
+//        normal.setEmailId("chunks@gmail.com")
+//        normal.setFirstName("chunks")
+//        normal.setPassword("abcdg")
+//        normal.setLastName("gupta")
+//        normal.setUserName("chunky")
+//        normal.setActive(true)
+//        normal.setAdmin(false)
+//        normal.validate()
+//        println normal.save(validate: false)
+
+//        User user = User.get(1)
+
+//        println user.getUserName()
+
 //        Topic topic = new Topic()
-//        topic.setVisibility(Visibility.Private)
-//        topic.setName("topic name")
-//        topic.setCreatedBy(User.get(1))
-//        topic.validate()
-//        log.error(topic.errors.allErrors)
-//        topic.save()
+//        topic.setVisibility(Visibility.Public)
+//        topic.setName("topicName")
+//        topic.setCreatedBy(normal)
+//        println topic.save()
+
 //
-//        subscribeTopics()
-//        createResource()
-//        createTopic()
-//addNormalAndAdmin()
+        addNormalAndAdmin()
+        createTopic()
+        createResource()
+        subscribeTopics()
+        creatingReadingItems()
+    }
+
+
+    def creatingReadingItems() {
+
+        List<User> users = User.getAll()
+        users.each {
+            User user ->
+                user.subscriptions.each {
+
+                    it.topic.resources.each {
+
+                        if (it.user != user && ReadingItem.findAllByResourceAndUser(it, user).size() == 0) {
+                            ReadingItem readingItem = new ReadingItem(user: user, isRead: false, resource: it)
+                            if (readingItem.save()) {
+                                user.save()
+                            } else {
+                                log.error("Error:${readingItem.errors.getAllErrors()}")
+                            }
+                        }
+                    }
+                }
+        }
+
+//        List<Resource> resource = Resource.getAll()
+//
+//        resource.each {
+//            ReadingItem readingItem = new ReadingItem(user: it.user, resource: it, isRead: true)
+//            readingItem.validate()
+//            log.error("Errorr ${readingItem.errors.getAllErrors()}")
+//            readingItem.save()
+//        }
 
     }
 
@@ -56,15 +100,20 @@ class BootStrap {
         users.each {
 
             User user = it
-            List<Topic> topics = Topic.findAllByCreatedByNotEqual(it)
+            List<Topic> topics = Topic.findAllByCreatedByNotEqual(user)
+            println topics
+
             topics.each {
-                Subscription subscription = new Subscription()
-                subscription.seriousness(Seriousness.VerySerious)
-                subscription.setCreatedBy(user)
-                subscription.setTopic(it)
-                subscription.validate()
-                log.error(subscription.errors.allErrors)
-                subscription.save()
+                if (Subscription.findAllByTopicAndUser(it, user).size() == 0) {
+                    Subscription subscription = new Subscription()
+                    subscription.setSeriousness(Seriousness.VerySerious)
+                    subscription.setUser(user)
+                    subscription.setTopic(it)
+                    subscription.validate()
+                    subscription.validate()
+                    log.error("Error:${subscription.errors.getAllErrors()}")
+                    println subscription.save()
+                }
             }
 
         }
@@ -77,11 +126,11 @@ class BootStrap {
 
 
         User normal = new User()
-        normal.setEmailId("chunks@gmail.com")
+        normal.setEmailId("chunks123456@gmail.com")
         normal.setFirstName("chunks")
         normal.setPassword("abcdg")
         normal.setLastName("gupta")
-        normal.setUserName("chunky")
+        normal.setUserName("chunkyGupta123")
         normal.setActive(true)
         normal.setAdmin(false)
         println normal.save(validate: false)
@@ -97,16 +146,15 @@ class BootStrap {
 
             List<Topic> topics = Topic.getAll()
 
-
             topics.each {
 
                 Topic myTopic = it
-                Resource linkResource = new LinkResource(url: "https://www.google.co.in/", description: "Description ", topic: myTopic, createdBy: myTopic.createdBy)
+                Resource linkResource = new LinkResource(url: "https://www.google.co.in/", description: "Description ", topic: myTopic, user: myTopic.createdBy)
                 linkResource.validate()
                 log.error("Resource Error: ${linkResource.errors.allErrors}")
                 linkResource.save()
 
-                Resource documentResource = new DocumentResouce(filePath: "file Path", description: "DEXKNDJVSK", createdBy: myTopic.createdBy, topic: myTopic)
+                Resource documentResource = new DocumentResouce(filePath: "file Path", description: "DEXKNDJVSK", user: myTopic.createdBy, topic: myTopic)
                 documentResource.validate()
                 log.error("Resource Error: ${documentResource.errors.allErrors}")
                 documentResource.save()
@@ -129,7 +177,8 @@ class BootStrap {
                     topic.setVisibility(Visibility.Private)
                     topic.setName("topic ${it}")
                     topic.setCreatedBy(user)
-                    topic.save()
+
+                    println topic.save()
                 }
             }
         }
