@@ -2,6 +2,7 @@ package grailsdomainassignment
 
 import bootcamp.DocumentResouce
 import bootcamp.LinkResource
+import bootcamp.RatingResource
 import bootcamp.ReadingItem
 import bootcamp.Resource
 import bootcamp.Subscription
@@ -9,12 +10,13 @@ import bootcamp.Topic
 import bootcamp.User
 import constant.Seriousness
 import constant.Visibility
+import utilities.AppConstants
 
 class BootStrap {
 
     def init = { servletContext ->
 
-        //        AppConstants.PASSWORD
+        println AppConstants.PASSWORD
 
 //        5.times {
 //            User normal = new User()
@@ -57,8 +59,64 @@ class BootStrap {
         createResource()
         subscribeTopics()
         creatingReadingItems()
+        createResourceRating()
+        question27()
+//        createReadingItemIfItDoesNotExistsInUsersReadingItem()
     }
 
+    void createResourceRating() {
+
+        List<User> userList = User.getAll()
+        userList.each {
+            User user ->
+                user.readingItem.each {
+                    if (!it.isRead && RatingResource.findAllByUser(user).size() == 0) {
+                        RatingResource resourceRating = new RatingResource(user: user, resource: it.resource, score: 4)
+                        resourceRating.validate()
+                        if (resourceRating.save()) {
+                            log.info("Saved Successfully")
+                            user.save()
+                        } else {
+                            log.error("${resourceRating.errors.getAllErrors()}")
+                        }
+                    }
+                }
+
+        }
+
+    }
+
+//Question24 Reading item of resource should be created only if it does not already exist in users reading item
+//    void createReadingItemIfItDoesNotExistsInUsersReadingItem(User user, Topic topic) {
+//        topic.resources.each {
+//            ReadingItem readingItem = new ReadingItem(user: user, resource: it, isRead: false)
+//            if (readingItem.save()) {
+//                it.addToReadingItems(readingItem)
+//                it.save()
+//                user.save()
+//            } else {
+//                log.error("Error: ${readingItem.errors.getAllErrors()}")
+//            }
+//        }
+//    }
+//Question27 createdBy of resourcerating should be createdby of reading item and resource of resourcerating should be resource of readingitem
+    void question27() {
+        List<RatingResource> resourceRatingList = RatingResource.getAll()
+        resourceRatingList.each {
+            RatingResource resourceRating ->
+                if (ReadingItem.findAllByUserAndResource(resourceRating.user, resourceRating.resource).size() == 0) {
+                    ReadingItem readingItem = new ReadingItem(user: resourceRating.user, resource: resourceRating.resource, isRead: false)
+                    if (readingItem.save()) {
+                        log.info("Saved Successfully")
+                        resourceRating.resource.addToReadingItems(readingItem)
+                        resourceRating.resource.save()
+                        resourceRating.user.save()
+                    } else {
+                        log.error("Error:- ${readingItem.errors.getAllErrors()}")
+                    }
+                }
+        }
+    }
 
     def creatingReadingItems() {
 

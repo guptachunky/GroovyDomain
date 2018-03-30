@@ -13,7 +13,7 @@ class User {
     Boolean admin
     Boolean active
 
-    static hasMany = [topics: Topic, subscriptions: Subscription, resources: Resource]
+    static hasMany = [topics: Topic, subscriptions: Subscription, resources: Resource, ratingResource: RatingResource, readingItem: ReadingItem]
 
     static constraints = {
 
