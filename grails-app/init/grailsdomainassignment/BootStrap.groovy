@@ -61,6 +61,10 @@ class BootStrap {
         creatingReadingItems()
         createResourceRating()
         question27()
+        List<User> userList = User.getAll()
+        userList.each {
+            println it.firstName
+        }
 //        createReadingItemIfItDoesNotExistsInUsersReadingItem()
     }
 

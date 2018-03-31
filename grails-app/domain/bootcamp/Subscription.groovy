@@ -9,6 +9,11 @@ class Subscription {
     Date dateCreated
     Date lastUpdated
 
+    static mapping = {
+        seriousness defaultValue: Seriousness.Serious
+        topics fetch: 'join'
+        user fetch: 'join'
+    }
     static belongsTo = [user: User, topic: Topic]
     static constraints = {
         user(nullable: false)

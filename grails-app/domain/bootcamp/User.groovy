@@ -15,6 +15,10 @@ class User {
 
     static hasMany = [topics: Topic, subscriptions: Subscription, resources: Resource, ratingResource: RatingResource, readingItem: ReadingItem]
 
+    static mapping = {
+        sort "firstName"
+//        sort("id": "desc")
+    }
     static constraints = {
 
         emailId(unique: true, email: true, blank: false)

@@ -4,14 +4,15 @@ package grailsdomainassignment
 class LoginCheckInterceptor {
 
     LoginCheckInterceptor() {
-        matchAll().excludes(controller: "login", action: "loginHandler")
+        matchAll().excludes(controller: "login")
     }
 
     boolean before() {
-        if (!session.user) {
-            flash.error = "session not active"
-            redirect(view: "login/index")
-        }
+//        if (!session.user) {
+//            flash.error = "session not active"
+//            redirect(view:"login")
+//
+//        }
 
         true
     }
@@ -21,4 +22,5 @@ class LoginCheckInterceptor {
     void afterView() {
         // no-op
     }
+
 }

@@ -10,17 +10,19 @@ class ApplicationInterceptor {
     }
 
     boolean before() {
-        if (!session.user) {
-            flash.error = "NO ACTIVE SESSION"
-            return false
-        }
+//        if (!session.user) {
+//            flash.error = "NO ACTIVE SESSION"
+//            redirect(controller:"login")
+////            return false
+//        }
+        log.info("ACTION AND CONTROLLER LOG: ${params.toString()}")
+
         true
     }
 
     boolean after() {
         flash.message = "Flashing"
         log.info("ACTION AND CONTROLLER LOG: ${params.toString()}")
-
 
         return true
     }
