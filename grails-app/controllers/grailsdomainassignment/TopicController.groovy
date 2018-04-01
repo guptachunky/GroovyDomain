@@ -17,7 +17,7 @@ class TopicController {
 
     }
 
-    def save(Topic topic, String Seriousness) {
+    def save(Topic topic, String seriousness) {
 
         if (topic.save()) {
             flash.message = "Topic Saved Successfully"

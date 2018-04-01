@@ -2,6 +2,7 @@ package bootcamp
 
 import constant.Seriousness
 import constant.Visibility
+import viewObject.TopicVO
 
 class Topic {
 
@@ -12,6 +13,41 @@ class Topic {
     Visibility visibility
 
     static hasMany = [subscriptions: Subscription, resources: Resource]
+
+    static TopicVO getTrendingTopic() {
+
+
+        List<Topic> topicList = Resource.createCriteria().list {
+            projections {
+                createAlias('topic', 't')
+                groupProperty('t.id')
+                property('t.name')
+                property('t.visibility')
+                count('t.id', 'topicCount')
+                property('t.createdBy')
+            }
+            eq('t.visibility', Visibility.Public)
+            order('topicCount', 'desc')
+            order('t.name', 'asc')
+            maxResults(5)
+
+        }
+
+
+
+
+
+        List topicVOList = []
+        topicList.each {
+
+            topicVOList.add(new TopicVO(id: it[0], name: it[1], visibility: it[2], count: it[3], createdBy: it[4]))
+
+
+        }
+        return topicVOList
+
+    }
+
 
     static constraints = {
 

@@ -1,5 +1,7 @@
 package bootcamp
 
+import commandobject.SearchCO
+
 class User {
 
     String firstName
@@ -12,6 +14,8 @@ class User {
     Date dateUpdated
     Boolean admin
     Boolean active
+    String confirmPassword
+    static transients = ['confirmPassword']
 
     static hasMany = [topics: Topic, subscriptions: Subscription, resources: Resource, ratingResource: RatingResource, readingItem: ReadingItem]
 
@@ -32,6 +36,11 @@ class User {
         admin(nullable: true)
         active(nullable: true)
         dateUpdated(nullable: true)
+//        confirmPassword(blank: false, validator: { password, obj ->
+//            def password2 = obj.password
+//            password == password2 ? true : ['invalid.matchingpasswords']
+//
+//        })
 
 
     }
@@ -60,6 +69,17 @@ class User {
     @Override
     String toString() {
         return "User = ${userName}"
+    }
+
+    List getUnreadResource(SearchCO searchCO) {
+
+        if (searchCO.q) {
+            List<ReadingItem> unReadItems = ReadingItem.createCriteria().list(max: 10, offset: 0) {
+                ilike('resource.description', this.resources.description)
+                eq('isRead', false)
+            }
+            return unReadItems
+        }
     }
 
 

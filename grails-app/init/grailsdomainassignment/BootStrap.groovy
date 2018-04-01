@@ -8,6 +8,7 @@ import bootcamp.Resource
 import bootcamp.Subscription
 import bootcamp.Topic
 import bootcamp.User
+import commandobject.ResourceSearchCo
 import constant.Seriousness
 import constant.Visibility
 import utilities.AppConstants
@@ -17,6 +18,8 @@ class BootStrap {
     def init = { servletContext ->
 
         println AppConstants.PASSWORD
+
+
 
 //        5.times {
 //            User normal = new User()
@@ -65,6 +68,17 @@ class BootStrap {
         userList.each {
             println it.firstName
         }
+
+        //Question 1 for gorm 2
+//        ResourceSearchCo resourceSearchCo = new ResourceSearchCo(topicId: 1)
+//        List<Resource> resourceList = Resource.search(resourceSearchCo).list()
+//        resourceList.each {
+//            println("---------------------" + it.description)
+//        }
+
+        println("--------------------------")
+        println Topic.getTrendingTopic().name
+
 //        createReadingItemIfItDoesNotExistsInUsersReadingItem()
     }
 

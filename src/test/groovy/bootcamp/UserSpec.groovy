@@ -16,7 +16,7 @@ class UserSpec extends Specification implements DomainUnitTest<User> {
         false == false
     }
 
-  /*  void "test employee validations"() {
+  void "test employee validations"() {
         setup:
 
         User user = new User()
@@ -101,6 +101,6 @@ class UserSpec extends Specification implements DomainUnitTest<User> {
         newUser.errors.getFieldErrorCount('userName') == 1
 
     }
-*/
+
 
 }

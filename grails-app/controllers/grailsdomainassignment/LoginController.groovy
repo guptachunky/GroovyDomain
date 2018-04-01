@@ -6,11 +6,12 @@ import utilities.AppConstants
 class LoginController {
 
     def index() {
-//
-//        if (session.user) {
+
+        if (session.user) {
 //            forward(controller: "user", action: "show", params: ["id": 1])
-//        } else
-        render(text: "Failure")
+            render(text:"Success ${session.user.userName}")
+        } else
+            render(text: "Failure")
     }
 
     def loginHandler(String username, String password) {
@@ -52,6 +53,7 @@ class LoginController {
         } else {
             flash.error = "error"
         }
+        session.user = normal
 
         redirect(action: "index")
     }

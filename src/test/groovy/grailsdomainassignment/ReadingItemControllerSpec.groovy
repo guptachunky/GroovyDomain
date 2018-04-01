@@ -1,10 +1,9 @@
-package linksharing
+package grailsdomainassignment
 
 import grails.testing.web.controllers.ControllerUnitTest
-import grailsdomainassignment.LoginController
 import spock.lang.Specification
 
-class LoginControllerSpec extends Specification implements ControllerUnitTest<LoginController> {
+class ReadingItemControllerSpec extends Specification implements ControllerUnitTest<ReadingItemController> {
 
     def setup() {
     }
