@@ -53,7 +53,7 @@ class Topic {
     }
 
 
-    List getSubscribedUsers(){
+    List getSubscribedUsers() {
 
         return this.subscriptions.user.toList()
 

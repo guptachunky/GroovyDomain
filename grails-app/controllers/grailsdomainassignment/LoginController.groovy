@@ -14,19 +14,17 @@ class LoginController {
 //            render(text: "Failure")
     }
 
-    def loginHandler(String username, String password) {
-        render(text: "${username +" "+ password}")
-        User user = User.findByUserNameAndPassword(username, password)
+    def loginHandler(String userName, String password) {
+        User user = User.findByUserNameAndPassword(userName, password)
         if (user) {
 
             if (user.active) {
                 session.user = user
-                redirect(controller: "user", action: "show", params: ["id": 1])
+                forward(controller: "user", action: "index")
 //                redirect(controller: "login", action: "index")
             } else {
 
                 flash.error = "YOUR ACCOUNT IS INACTIVE"
-                render(text: "inactive")
             }
         } else {
             flash.error = "User Not Found"

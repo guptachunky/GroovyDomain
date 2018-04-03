@@ -83,8 +83,8 @@ class User {
     }
 
 
-    List getSubscribedTopics() {
-        this.subscriptions.toList()
+    List<String> getSubscribedTopics() {
+        this.subscriptions.topic.name
     }
 
 

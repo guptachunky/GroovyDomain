@@ -33,7 +33,7 @@
 
     </button>
     <button type="img" class="fa fa-comment pull-right" data-toggle="modal" style="margin-left: 10px;"
-            data-target="#myModal2">
+            data-target="#myModal4">
 
     </button>
 
@@ -47,9 +47,27 @@
 <body>
 
 <div class="modal fade" id="create" role="dialog">
-    %{--<g:layout template="/topic/create"></g:layout>--}%
     <g:render template="/topic/create"/>
 </div>
+
+
+<div id="myModal5" class="modal fade" role="dialog">
+
+    <g:render template="/topic/email"/>
+</div>
+
+<div class="modal fade" id="myModal3" role="dialog">
+
+    <g:render template="/linkResource/create"/>
+</div>
+
+
+<div class="modal fade" id="myModal4" role="dialog">
+
+    <g:render template="/documentResource/create"/>
+
+</div>
+
 
 <div class="container col-sm-12">
     <div class="row">
@@ -86,86 +104,13 @@
 
             </div>
 
-
-            <div class="panel panel-primary" style="margin-bottom: 0">
-
-                <div class="panel-heading">
-                    <h3 class="panel-title">
-                        Subscriptions
-                        <a href="#" class="pull-right">View All</a>
-                    </h3>
-                </div>
-
-                <div class="panel-body">
-
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="row">
-
-                                <div class="col-sm-3 glyphicon glyphicon-user fa-5x">
-                                    <!--  <img src="avatar.png" class="img-thumbnail"> -->
-
-                                </div>
-
-                                <div class="col-sm-9">
-                                    <a href="#" class="pull-left">Grails</a>
-                                    <br>
-
-                                    <div class="row">
-
-                                        <div class="col-sm-6">
-                                            <h6 class="text-muted">@uday</h6>
-                                            <a href="#">Unsubscribe</a>
-                                        </div>
-
-
-                                        <div class="col-sm-3">
-                                            <h6 class="text-muted pull-left">Subscriptions</h6>
-                                            <h6 class="text-primary">50</h6>
-                                        </div>
-
-                                        <div class="col-sm-3">
-                                            <h6 class="text-muted  pull-right" ">Post
-                                            <br>
-                                            <br>
-
-                                            <p class="text-primary">30</p>
-                                        </h6>
-
-                                        </div>
-
-                                        <span type="img" class="fa fa-file pull-right fa-2x"
-                                              style="margin-left: 10px;  margin-right: 5px;" data-toggle="modal"
-                                              data-target="#myModal4">
-                                        </span>
-
-                                        <span type="img" class="fa fa-envelope pull-right fa-2x"
-                                              style="margin-left: 10px;" data-toggle="modal" data-target="#myModal5">
-                                        </span>
-                                        <span type="img" class="glyphicon glyphicon-trash pull-right fa-2x"
-                                              style="margin-left: 10px;" data-toggle="modal" data-target="#myModal">
-                                        </span>
-                                        <select class="pull-right">
-                                            <option>Serious</option>
-                                            <option>Private</option>
-                                        </select>
-
-                                        <div>
-                                            <select class="pull-right">
-                                                <option>Private</option>
-                                                <option>Public</option>
-                                            </select>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-
-                </div>
-            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <g:render template="/topic/show"/>
+                            </div></div></div></div></div>
 
             <div class="panel panel-primary">
                 <div class="panel-body">
@@ -227,19 +172,19 @@
             </div>
 
 
-
-
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-6" >
+                    <div class="col-lg-6">
                         <div class="panel panel-default">
                             <div class="panel-heading">
 
                                 <div class="row">
                                     <div class="col-lg-4 subform">Trending Topics</div>
-                                    <div class="col-lg-offset-4 col-lg-4"> <a class="a-right">View All</a></div>
+
+                                    <div class="col-lg-offset-4 col-lg-4"><a class="a-right">View All</a></div>
                                 </div>
                             </div>
+
                             <div class="panel-body">
                                 <g:each in="${bootcamp.Topic.getTrendingTopic()}" var="trendingTopics">
 
@@ -248,26 +193,39 @@
                                         <div class="col-lg-offset-1 col-lg-2">
                                             <img class="img-responsive" alt="dummy" src="index.jpeg"/>
                                         </div>
+
                                         <div class="col-lg-9">
                                             <div class="row">
                                                 <div class=col-sm-12>
-                                                    <a href="#" class="anchor">${trendingTopics.name} </a>
+                                                    %{--<a href="#" class="anchor">${trendingTopics.name} </a>--}%
+                                                    <a href="#" class="anchor">trending topics</a>
+
                                                 </div>
                                             </div>
+
                                             <div class="row">
                                                 <div class="col-sm-4">
-                                                    <small class="text-muted">@${trendingTopics.createdBy.userName}</small>
+                                                    <small class="text-muted">trendingTopics.createdBy.userName</small>
+                                                    %{--<small class="text-muted">@${trendingTopics.createdBy.userName}</small>--}%
+
                                                 </div>
+
                                                 <div class="col-sm-4">
                                                     Subscriptions</div>
+
                                                 <div class="col-sm-4">Post</div>
                                             </div>
+
                                             <div class="row">
                                                 <div class="col-sm-4"><a>Unsubscribe</a></div>
 
                                                 <div class="col-sm-4"><a>50</a></div>
-                                                <div class="col-sm-4"><a>${trendingTopics.count}</a></div>
+
+                                                <div class="col-sm-4"><a>{trendingTopics.count}</a></div>
+                                                %{--<div class="col-sm-4"><a>${trendingTopics.count}</a></div>--}%
+
                                             </div>
+
                                             <div class="row">
                                                 <div class="col-sm-4">
                                                     <select>
@@ -276,6 +234,7 @@
                                                         <option>Casual</option>
                                                     </select>
                                                 </div>
+
                                                 <div class="col-sm-4">
                                                     <select>
                                                         <option>Private</option>
@@ -283,6 +242,7 @@
                                                     </select>
 
                                                 </div>
+
                                                 <div class="col-sm-4">
                                                     <i class="fa fa-envelope-o" aria-hidden="true"></i>
                                                     <i class="fa fa-file-o" aria-hidden="true"></i>
@@ -303,81 +263,77 @@
             </div>
         </div>
 
-
     </div>
 </div>
-            <div class="panel panel-primary">
-                <div class="panel-body">
 
-                    <div class="row">
-                        <div class="col-sm-12">
+<div class="panel panel-primary">
+    <div class="panel-body">
 
-                            <div class="row">
-                                <div class="col-sm-3 glyphicon glyphicon-user fa-5x">
-                                    <!--  <img src="avatar.png" class="img-thumbnail"> -->
+        <div class="row">
+            <div class="col-sm-12">
 
-                                </div>
+                <div class="row">
+                    <div class="col-sm-3 glyphicon glyphicon-user fa-5x">
+                        <!--  <img src="avatar.png" class="img-thumbnail"> -->
 
-                                <div class="col-sm-9">
-                                    <a href="#" class="pull-left">Grails</a>
-                                    <br>
+                    </div>
 
-                                    <div class="row">
+                    <div class="col-sm-9">
+                        <a href="#" class="pull-left">Grails</a>
+                        <br>
 
-                                        <div class="col-sm-6">
-                                            <h6 class="text-muted">@uday</h6>
-                                            <a href="#">Unsubscribe</a>
-                                        </div>
+                        <div class="row">
 
-                                        <div class="col-sm-3">
-                                            <h6 class="text-muted pull-left">Subscriptions</h6>
-                                            <h6 class="text-primary">50</h6>
-                                        </div>
+                            <div class="col-sm-6">
+                                <h6 class="text-muted">@uday</h6>
+                                <a href="#">Unsubscribe</a>
+                            </div>
 
-                                        <div class="col-sm-3">
-                                            <h6 class="text-muted  pull-right" ">Post
-                                            <br>
-                                            <br>
+                            <div class="col-sm-3">
+                                <h6 class="text-muted pull-left">Subscriptions</h6>
+                                <h6 class="text-primary">50</h6>
+                            </div>
 
-                                            <p class="text-primary">30</p>
-                                        </h6>
+                            <div class="col-sm-3">
+                                <h6 class="text-muted  pull-right" ">Post
+                                <br>
+                                <br>
 
-                                        </div>
+                                <p class="text-primary">30</p>
+                            </h6>
 
-
-                                        <span type="img" class="fa fa-file pull-right fa-2x"
-                                              style="margin-left: 10px;  margin-right: 5px;" data-toggle="modal"
-                                              data-target="#myModal4">
-
-                                        </span>
-
-                                        <span type="img" class="fa fa-envelope pull-right fa-2x"
-                                              style="margin-left: 10px;" data-toggle="modal" data-target="#myModal5">
-
-                                        </span>
-
-                                        <span type="img" class="glyphicon glyphicon-trash pull-right fa-2x"
-                                              style="margin-left: 10px;" data-toggle="modal" data-target="#myModal">
-
-                                        </span>
+                            </div>
 
 
+                            <span type="img" class="fa fa-file pull-right fa-2x"
+                                  style="margin-left: 10px;  margin-right: 5px;" data-toggle="modal"
+                                  data-target="#myModal4">
 
-                                        <select class="pull-right">
-                                            <option>Serious</option>
-                                            <option>Private</option>
-                                        </select>
+                            </span>
 
-                                        <div>
-                                            <select class="pull-right">
-                                                <option>Private</option>
-                                                <option>Public</option>
-                                            </select>
+                            <span type="img" class="fa fa-envelope pull-right fa-2x"
+                                  style="margin-left: 10px;" data-toggle="modal" data-target="#myModal5">
 
-                                        </div>
-                                    </div>
+                            </span>
 
-                                </div>
+                            <span type="img" class="glyphicon glyphicon-trash pull-right fa-2x"
+                                  style="margin-left: 10px;" data-toggle="modal" data-target="#myModal">
+
+                            </span>
+
+
+
+                            <select class="pull-right">
+                                <option>Serious</option>
+                                <option>Private</option>
+                            </select>
+
+                            <div>
+                                <select class="pull-right">
+                                    <option>Private</option>
+                                    <option>Public</option>
+                                </select>
+
                             </div>
                         </div>
 
@@ -386,40 +342,44 @@
             </div>
 
         </div>
-
-
-        <div class="col-sm-7">
-
-            <div class="panel panel-default">
-
-                <div class="panel panel-heading panel-default">
-                    <h4>
-                        <u>Recent Shares</u>
-                    </h4>
-                </div>
-
-                <div class="panel panel-body col-sm-3">
-                    <img src="vk.jpg" width="100" height="150" class="img-rounded img-responsive">
-                </div>
-
-                <div class="panel panel-body col-sm-9">
-                    UDAY PRATAP SINGH
-                    <div class="text-muted">
-                        @uday 5min
-                    </div>
-                    <a href="self" class=" col-sm-8">Grails</a>
-                    <br>
-                    Learn how to add a search box inside a responsive navigation menu.
-                    Learn how to add a search box inside a responsive navigation menu.
-                </div>
-
-
-                <div class="panel-body">
-                    <div class="col-sm-12">
-
-                    </div></div></div></div>
-
     </div>
+</div>
+
+</div>
+
+
+<div class="col-sm-7">
+
+    <div class="panel panel-default">
+
+        <div class="panel panel-heading panel-default">
+            <h4>
+                <u>Recent Shares</u>
+            </h4>
+        </div>
+
+        <div class="panel panel-body col-sm-3">
+            <img src="vk.jpg" width="100" height="150" class="img-rounded img-responsive">
+        </div>
+
+        <div class="panel panel-body col-sm-9">
+            UDAY PRATAP SINGH
+            <div class="text-muted">
+                @uday 5min
+            </div>
+            <a href="self" class=" col-sm-8">Grails</a>
+            <br>
+            Learn how to add a search box inside a responsive navigation menu.
+            Learn how to add a search box inside a responsive navigation menu.
+        </div>
+
+
+        <div class="panel-body">
+            <div class="col-sm-12">
+
+            </div></div></div></div>
+
+</div>
 
 </div>
 </body>

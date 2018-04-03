@@ -21,22 +21,22 @@ class TopicControllerSpec extends Specification implements ControllerUnitTest<To
         true == false
     }
 
-//    def "topic should be saved on save action"() {
-//        given:
-//        User user = new User(email: "chunky@gmail.com", userName: "chunkygupta", password: "ROOT@123",
-//                firstName: "Chunky", lastName: "Gupta", admin: false, active: true, photo: 101)
-//
-//        session.user = user
-//        Topic topic = new Topic(name: "topic20", visibility: Visibility.Public, createdBy: session.user)
-//        when:
-//        controller.save(topic, "Casual")
-//
-//        then:
-//        println(topic.createdBy)
-//        response.contentAsString == "success"
-//
-//
-//    }
+    def "topic should be saved on save action"() {
+        given:
+        User user = new User(email: "chunky@gmail.com", userName: "chunkygupta", password: "ROOT@123",
+                firstName: "Chunky", lastName: "Gupta", admin: false, active: true, photo: 101)
+
+        session.user = user
+        Topic topic = new Topic(name: "topic20", visibility: Visibility.Public, createdBy: session.user)
+        when:
+        controller.save(topic, "Casual")
+
+        then:
+        println(topic.createdBy)
+        response.contentAsString == "success"
+
+
+    }
 //
 //    def "Delete topic"() {
 //        given:

@@ -63,4 +63,23 @@ abstract class Resource {
 
         return sum1
     }
+
+
+    List<Resource> topPost() {
+
+        List resourceIds = RatingResource.createCriteria().list {
+            projections {
+                property('resource.id')
+            }
+            groupProperty('resource.id')
+            count('resource.id', 'resourceCount')
+            order('resourceCount', 'desc')
+            maxResults(5)
+        }
+
+        List<Resource> resources = Resource.getAll(resourceIds)
+        return resources
+
+
+    }
 }

@@ -19,14 +19,19 @@ class TopicController {
 
     def save(Topic topic) {
 
+        println(params)
+        topic.createdBy = session.user
+
         if (topic.save()) {
             flash.message = "Topic Saved Successfully"
             render("success")
         } else {
-            log.error(topic.errors.allErrors)
             flash.message = "Topic not saved"
             render("error")
         }
 
+
     }
+
+
 }
