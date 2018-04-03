@@ -37,6 +37,10 @@ class Topic {
 
 
 
+
+
+
+
         List topicVOList = []
         topicList.each {
 
@@ -48,6 +52,12 @@ class Topic {
 
     }
 
+
+    List getSubscribedUsers(){
+
+        return this.subscriptions.user.toList()
+
+    }
 
     static constraints = {
 
@@ -78,4 +88,6 @@ class Topic {
                 "name='" + name + '\'' +
                 '}'
     }
+
+
 }

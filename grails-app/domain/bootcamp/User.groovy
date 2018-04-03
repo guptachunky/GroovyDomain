@@ -15,7 +15,7 @@ class User {
     Boolean admin
     Boolean active
     String confirmPassword
-    static transients = ['confirmPassword']
+    static transients = ['confirmPassword', 'subscribedTopics']
 
     static hasMany = [topics: Topic, subscriptions: Subscription, resources: Resource, ratingResource: RatingResource, readingItem: ReadingItem]
 
@@ -80,6 +80,11 @@ class User {
             }
             return unReadItems
         }
+    }
+
+
+    List getSubscribedTopics() {
+        this.subscriptions.toList()
     }
 
 

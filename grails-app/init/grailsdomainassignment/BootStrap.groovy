@@ -251,7 +251,7 @@ class BootStrap {
                 5.times {
                     Topic topic = new Topic()
                     topic.setVisibility(Visibility.Private)
-                    topic.setName("topic ${it}")
+                    topic.setName("topic ${it}abc")
                     topic.setCreatedBy(user)
 
                     println topic.save()

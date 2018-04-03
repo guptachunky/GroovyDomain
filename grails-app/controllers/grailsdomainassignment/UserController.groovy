@@ -8,7 +8,7 @@ import constant.Visibility
 class UserController {
 
     def index() {
-        render(text: "${session.user.userName}")
+//        render(text: "${session.user.userName}")
     }
 
 
