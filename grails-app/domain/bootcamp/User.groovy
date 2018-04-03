@@ -84,7 +84,10 @@ class User {
 
 
     List<String> getSubscribedTopics() {
-        this.subscriptions.topic.name
+        List<String> subscribedTopics = []
+        subscribedTopics = this.subscriptions.each {
+            it.topic.name
+        }
     }
 
 
