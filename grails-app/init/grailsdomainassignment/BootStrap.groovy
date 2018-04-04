@@ -19,8 +19,6 @@ class BootStrap {
 
         println AppConstants.PASSWORD
 
-
-
 //        5.times {
 //            User normal = new User()
 //            normal.setEmailId("chunks@gmail.com${it}")
@@ -61,13 +59,17 @@ class BootStrap {
         createTopic()
         createResource()
         subscribeTopics()
-        creatingReadingItems()
-        createResourceRating()
-        question27()
+//        createResourceRating()
+//        question27()
         List<User> userList = User.getAll()
         userList.each {
             println it.firstName
         }
+
+        creatingReadingItems()
+
+
+//        println(userList.first().getSubscribedTopics())
 
         //Question 1 for gorm 2
 //        ResourceSearchCo resourceSearchCo = new ResourceSearchCo(topicId: 1)
@@ -142,29 +144,24 @@ class BootStrap {
         users.each {
             User user ->
                 user.subscriptions.each {
-
                     it.topic.resources.each {
-
                         if (it.user != user && ReadingItem.findAllByResourceAndUser(it, user).size() == 0) {
-                            ReadingItem readingItem = new ReadingItem(user: user, isRead: false, resource: it)
-                            if (readingItem.save()) {
-                                user.save()
+                            ReadingItem readingItem = new ReadingItem(user: user, isRead: true, resource: it)
+
+
+                            if (!readingItem.save(flush: true)) {
+                                log.error("Error while saving : $readingItem")
                             } else {
-                                log.error("Error:${readingItem.errors.getAllErrors()}")
-                            }
+                                log.info("Saved Succesfully: $readingItem")
+                              }
+
+//                            readingItem.save(validate: false)
                         }
+
                     }
                 }
         }
 
-//        List<Resource> resource = Resource.getAll()
-//
-//        resource.each {
-//            ReadingItem readingItem = new ReadingItem(user: it.user, resource: it, isRead: true)
-//            readingItem.validate()
-//            log.error("Errorr ${readingItem.errors.getAllErrors()}")
-//            readingItem.save()
-//        }
 
     }
 

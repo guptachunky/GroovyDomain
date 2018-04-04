@@ -1,6 +1,7 @@
 package bootcamp
 
 import commandobject.ResourceSearchCo
+import constant.Visibility
 import viewObject.RaitingInfoVO
 
 abstract class Resource {
@@ -17,6 +18,8 @@ abstract class Resource {
         }
 
     }
+
+    static transients = ['topPost']
     static belongsTo = [user: User, topic: Topic]
 
     static hasMany = [ratings: RatingResource, readingItems: ReadingItem]
@@ -25,6 +28,20 @@ abstract class Resource {
         description(type: 'text')
     }
 
+
+    Boolean canViewedBy(User user) {
+
+        if (this.topic.visibility == Visibility.Public) {
+            true
+        } else if (user.admin) {
+            true
+        } else if (this.topic.createdBy == user) {
+            true
+        } else {
+            false
+        }
+
+    }
 
     RaitingInfoVO getRatingInfoVO() {
 
@@ -65,7 +82,13 @@ abstract class Resource {
     }
 
 
-    List<Resource> topPost() {
+    static String findResource() {
+
+        this.getClass().getName()
+    }
+
+
+    static List<Resource> getTopPost() {
 
         List resourceIds = RatingResource.createCriteria().list {
             projections {

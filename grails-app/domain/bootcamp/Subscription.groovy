@@ -20,4 +20,11 @@ class Subscription {
         topic(nullable: false, unique: "user")
         seriousness(nullable: false)
     }
+
+//
+//    static List<User> getTopicSubscriptions() {
+//
+//    }
+
+
 }

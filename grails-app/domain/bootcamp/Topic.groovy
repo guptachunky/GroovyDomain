@@ -16,7 +16,6 @@ class Topic {
 
     static TopicVO getTrendingTopic() {
 
-
         List<Topic> topicList = Resource.createCriteria().list {
             projections {
                 createAlias('topic', 't')
@@ -34,13 +33,6 @@ class Topic {
         }
 
 
-
-
-
-
-
-
-
         List topicVOList = []
         topicList.each {
 
@@ -54,8 +46,10 @@ class Topic {
 
 
     List getSubscribedUsers() {
-
-        return this.subscriptions.user.toList()
+        List<User> listOfUsers = []
+        return this.subscriptions.each {
+            listOfUsers.add(it.user)
+        }
 
     }
 
@@ -88,6 +82,15 @@ class Topic {
                 "name='" + name + '\'' +
                 '}'
     }
+
+
+    Boolean isPublic() {
+        if (this.visibility == Visibility.Public) {
+            true
+        } else
+            false
+    }
+
 
 
 }

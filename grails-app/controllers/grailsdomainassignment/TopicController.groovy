@@ -8,7 +8,6 @@ class TopicController {
     def index() {}
 
     def show() {
-        User user = User.get(session.user.id)
 
     }
 

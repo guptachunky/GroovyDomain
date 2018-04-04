@@ -1,7 +1,9 @@
 package grailsdomainassignment
 
+import bootcamp.ReadingItem
 import bootcamp.Resource
 import bootcamp.Topic
+import bootcamp.User
 import commandobject.ResourceSearchCo
 
 import constant.Visibility
@@ -15,25 +17,26 @@ class ResourceController {
         Resource resource = Resource.load(id)
     }
 
-    def show(Integer id) {
-        Resource resource = Resource.get(id)
-        RaitingInfoVO ratingInfoVO = resource.getRatingInfoVO(resource)
-        render(ratingInfoVO.averageScore)
+    def show() {
 
-        println("--------------------------")
-        println Topic.getTrendingTopic()
+        Boolean canView =params.resource.canViewedBy(session.user)
+
+    }
 
 
+    def changeIsRead() {
+        Resource resource = params.resource
+        User user = session.user
+
+        ReadingItem readingItem = ReadingItem.findByUserAndResource(user, resource)
     }
 
 
     def search() {
 
-        ResourceSearchCo resourceSearchCo = new ResourceSearchCo()
+        flash.error = "No Search Criteria"
 
-        if (resourceSearchCo.q) {
-            resourceSearchCo.visibility = Visibility.Public
-        }
+
     }
 
     def notFoundException(Exception exception) {

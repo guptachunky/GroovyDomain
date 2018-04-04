@@ -35,7 +35,7 @@
             <select class="form-control" name="topic" id="topicLink">
                 <g:each in="${session.user?.subscriptions}" var="subscribedTopics">
 
-                    <option value="${subscribedTopics?.topics?.name}">${subscribedTopics?.topics?.name}</option>
+                    <option value="${subscribedTopics?.topic?.name}">${subscribedTopics?.topic?.name}</option>
                 </g:each>
             </select>
         </div>

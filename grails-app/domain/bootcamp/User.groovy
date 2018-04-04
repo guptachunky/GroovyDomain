@@ -1,5 +1,6 @@
 package bootcamp
 
+import com.sun.org.apache.xpath.internal.operations.Bool
 import commandobject.SearchCO
 
 class User {
@@ -20,8 +21,7 @@ class User {
     static hasMany = [topics: Topic, subscriptions: Subscription, resources: Resource, ratingResource: RatingResource, readingItem: ReadingItem]
 
     static mapping = {
-        sort "firstName"
-//        sort("id": "desc")
+
     }
     static constraints = {
 
@@ -36,32 +36,16 @@ class User {
         admin(nullable: true)
         active(nullable: true)
         dateUpdated(nullable: true)
-//        confirmPassword(blank: false, validator: { password, obj ->
-//            def password2 = obj.password
-//            password == password2 ? true : ['invalid.matchingpasswords']
-//
-//        })
-
-
     }
 
 
     def afterInsert() {
-//        log.info "----------Into After Insert------"
     }
 
     def beforeInsert() {
-//        log.info "----------Into before Insert------"
     }
 
     def beforeValidate() {
-
-//        Ques fourth
-//        if (User.count() == 0) {
-//            return true
-//        } else {
-//            return false
-//        }
 
     }
 
@@ -82,12 +66,56 @@ class User {
         }
     }
 
-
-    List<String> getSubscribedTopics() {
-        List<String> subscribedTopics = []
-        subscribedTopics = this.subscriptions.each {
-            it.topic.name
+    List getSubscribedTopics() {
+        List<Topic> subscribedTopics = []
+        this.subscriptions.each {
+            if (!(it.topic.createdBy == it.user)) {
+                subscribedTopics.add(it.topic)
+            }
         }
+
+        return subscribedTopics
+    }
+
+
+    Integer getSubscriptionCount() {
+
+        this.subscriptions.count()
+    }
+
+
+    Boolean canDeleteResource(Resource resource) {
+
+        if (this.admin) {
+            return true
+        } else if (resource.user == this) {
+            true
+        } else {
+            return false
+        }
+    }
+
+
+    Integer getScore(Resource resource) {
+        RatingResource ratingResource = RatingResource.findByUserAndResource(this, resource: resource)
+        return ratingResource.score
+    }
+
+    Boolean isSubscribed(Topic topic) {
+        List<User> userList = []
+        userList = Subscription.createCriteria().list {
+            projections {
+                property("user")
+            }
+
+            eq("topic", topic)
+        }
+
+
+        if (userList.contains(this)) {
+            true
+        } else
+            false
     }
 
 

@@ -6,12 +6,13 @@ import utilities.AppConstants
 class LoginController {
 
     def index() {
-
-//        if (session.user) {
-////            forward(controller: "user", action: "show", params: ["id": 1])
-//            render(text:"Success ${session.user.userName}")
-//        } else
-//            render(text: "Failure")
+        if (session.user) {
+            log.info("REDIRECTING TO USER INDEX")
+            forward(controller: "User", action: "index")
+        } else {
+            log.info("NO SESSION USER FOUND")
+            render(view: 'index')
+        }
     }
 
     def loginHandler(String userName, String password) {
@@ -21,7 +22,6 @@ class LoginController {
             if (user.active) {
                 session.user = user
                 forward(controller: "user", action: "index")
-//                redirect(controller: "login", action: "index")
             } else {
 
                 flash.error = "YOUR ACCOUNT IS INACTIVE"

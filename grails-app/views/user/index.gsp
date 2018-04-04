@@ -5,7 +5,7 @@
   Time: 10:03 AM
 --%>
 
-<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ page import="bootcamp.Topic" contentType="text/html;charset=UTF-8" %>
 <!Doctype html>
 <html>
 <head>
@@ -69,318 +69,319 @@
 </div>
 
 
-<div class="container col-sm-12">
+<div class="container">
     <div class="row">
-
-        <div class="col-sm-5">
-
+        <div class="col-lg-6">
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <div class="col-sm-12">
-                        <div class="row">
-                            <div class="col-sm-3 glyphicon glyphicon-user fa-5x">
-                            </div>
 
-                            <div class="col-sm-9">
-
-                                <p>Uday Pratap Singh<br><small class="text-muted">@uday</small></p>
-
-                                <div class="row">
-
-                                    <h6 class="text-muted col-sm-6">Subscriptions
-                                        <p class="text-primary">50</p>
-                                    </h6>
-
-                                    <h6 class="text-muted col-sm-6">Topics
-                                        <p class="text-primary">30</p>
-                                    </h6>
-
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <g:render template="/topic/show"/>
-                            </div></div></div></div></div>
-
-            <div class="panel panel-primary">
-                <div class="panel-body">
-
-                    <div class="row">
-                        <div class="col-sm-12">
-
-                            <div class="row">
-                                <div class="col-sm-3 glyphicon glyphicon-user fa-5x">
-                                    <!--  <img src="avatar.png" class="img-thumbnail"> -->
-
-                                </div>
-
-                                <div class="col-sm-9">
-                                    <a href="#" class="pull-left">Grails</a>
-                                    <br>
-
-                                    <div class="row">
-
-                                        <div class="col-sm-6">
-                                            <h6 class="text-muted">@uday</h6>
-                                            <a href="#">Unsubscribe</a>
-                                        </div>
-
-                                        <div class="col-sm-3">
-                                            <h6 class="text-muted pull-left">Subscriptions</h6>
-                                            <h6 class="text-primary">50</h6>
-                                        </div>
-
-                                        <div class="col-sm-3">
-                                            <h6 class="text-muted  pull-right" ">Post
-                                            <br>
-                                            <br>
-
-                                            <p class="text-primary">30</p>
-                                        </h6>
-
-                                        </div>
-
-
-                                        <span type="img" class="fa fa-envelope pull-right fa-2x"
-                                              style="margin-left: 10px; margin-right: 5px;" data-toggle="modal"
-                                              data-target="#myModal5">
-
-                                        </span>
-                                        <select class="pull-right">
-                                            <option>Serious</option>
-                                            <option>Private</option>
-                                        </select>
-
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-
-                                <div class="row">
-                                    <div class="col-lg-4 subform">Trending Topics</div>
-
-                                    <div class="col-lg-offset-4 col-lg-4"><a class="a-right">View All</a></div>
-                                </div>
-                            </div>
-
-                            <div class="panel-body">
-                                <g:each in="${bootcamp.Topic.getTrendingTopic()}" var="trendingTopics">
-
-                                    <div class="row">
-
-                                        <div class="col-lg-offset-1 col-lg-2">
-                                            <img class="img-responsive" alt="dummy" src="index.jpeg"/>
-                                        </div>
-
-                                        <div class="col-lg-9">
-                                            <div class="row">
-                                                <div class=col-sm-12>
-                                                    %{--<a href="#" class="anchor">${trendingTopics.name} </a>--}%
-                                                    <a href="#" class="anchor">trending topics</a>
-
-                                                </div>
-                                            </div>
-
-                                            <div class="row">
-                                                <div class="col-sm-4">
-                                                    <small class="text-muted">trendingTopics.createdBy.userName</small>
-                                                    %{--<small class="text-muted">@${trendingTopics.createdBy.userName}</small>--}%
-
-                                                </div>
-
-                                                <div class="col-sm-4">
-                                                    Subscriptions</div>
-
-                                                <div class="col-sm-4">Post</div>
-                                            </div>
-
-                                            <div class="row">
-                                                <div class="col-sm-4"><a>Unsubscribe</a></div>
-
-                                                <div class="col-sm-4"><a>50</a></div>
-
-                                                <div class="col-sm-4"><a>{trendingTopics.count}</a></div>
-                                                %{--<div class="col-sm-4"><a>${trendingTopics.count}</a></div>--}%
-
-                                            </div>
-
-                                            <div class="row">
-                                                <div class="col-sm-4">
-                                                    <select>
-                                                        <option selected="true">Serious</option>
-                                                        <option>VerySerious</option>
-                                                        <option>Casual</option>
-                                                    </select>
-                                                </div>
-
-                                                <div class="col-sm-4">
-                                                    <select>
-                                                        <option>Private</option>
-                                                        <option selected="true">Public</option>
-                                                    </select>
-
-                                                </div>
-
-                                                <div class="col-sm-4">
-                                                    <i class="fa fa-envelope-o" aria-hidden="true"></i>
-                                                    <i class="fa fa-file-o" aria-hidden="true"></i>
-                                                    <i class="fa fa-trash" aria-hidden="true"></i>
-                                                </div>
-
-                                            </div>
-                                        </div>
-
-                                        <hr/>
-                                    </div>
-                                </g:each>
-                            </div>
-                        </div>
+                    <div class="col-lg-offset-1 col-lg-2">
+                        <img class="img-responsive" alt="dummy" src="index.jpeg"/>
                     </div>
 
-                </div>
-            </div>
-        </div>
-
-    </div>
-</div>
-
-<div class="panel panel-primary">
-    <div class="panel-body">
-
-        <div class="row">
-            <div class="col-sm-12">
-
-                <div class="row">
-                    <div class="col-sm-3 glyphicon glyphicon-user fa-5x">
-                        <!--  <img src="avatar.png" class="img-thumbnail"> -->
-
-                    </div>
-
-                    <div class="col-sm-9">
-                        <a href="#" class="pull-left">Grails</a>
-                        <br>
+                    <div class="col-lg-9">
+                        <p class="name-font">${session.user.userName}<sub
+                                class="text-muted">@${session.user.firstName}</sub></p>
 
                         <div class="row">
+                            <div class="col-sm-6">
+                                <span class="">Subscription</span>
+                            </div>
 
                             <div class="col-sm-6">
-                                <h6 class="text-muted">@uday</h6>
-                                <a href="#">Unsubscribe</a>
-                            </div>
-
-                            <div class="col-sm-3">
-                                <h6 class="text-muted pull-left">Subscriptions</h6>
-                                <h6 class="text-primary">50</h6>
-                            </div>
-
-                            <div class="col-sm-3">
-                                <h6 class="text-muted  pull-right" ">Post
-                                <br>
-                                <br>
-
-                                <p class="text-primary">30</p>
-                            </h6>
-
-                            </div>
-
-
-                            <span type="img" class="fa fa-file pull-right fa-2x"
-                                  style="margin-left: 10px;  margin-right: 5px;" data-toggle="modal"
-                                  data-target="#myModal4">
-
-                            </span>
-
-                            <span type="img" class="fa fa-envelope pull-right fa-2x"
-                                  style="margin-left: 10px;" data-toggle="modal" data-target="#myModal5">
-
-                            </span>
-
-                            <span type="img" class="glyphicon glyphicon-trash pull-right fa-2x"
-                                  style="margin-left: 10px;" data-toggle="modal" data-target="#myModal">
-
-                            </span>
-
-
-
-                            <select class="pull-right">
-                                <option>Serious</option>
-                                <option>Private</option>
-                            </select>
-
-                            <div>
-                                <select class="pull-right">
-                                    <option>Private</option>
-                                    <option>Public</option>
-                                </select>
-
+                                <span>Topic</span>
                             </div>
                         </div>
 
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <a href="#">20</a>
+
+                            </div>
+
+                            <div class="col-sm-6">
+                                <a href="#">10</a>
+
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+        </div>
 
+
+        <div class="col-lg-6" style="left: 20px;">
+            <div class="panel panel-default">
+                <div class="panel-heading">Inbox</div>
+
+                <div class="panel-body">
+
+                    <div class="col-lg-offset-1 col-lg-2">
+                        <img class="img-responsive" alt="dummy" src="index.jpeg"/>
+                    </div>
+
+                    <div class="col-lg-9">
+                        <span>Uday Pratap Singh</span> <small class="text-muted">@uday
+                    5min</small> <a class="a-right" href="#" class="anchor">Grails</a>
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <small><a href="#">Download</a>
+                                </small>
+                            </div>
+
+                            <div class="col-sm-3">
+                                <small>
+                                    <a href="#">View full site</a>
+                                </small>
+                            </div>
+
+                            <div class="col-sm-4">
+                                %{--<small>--}%
+                                %{--<a href="#">Mark as read</a>--}%
+                                %{--</small>--}%
+                                <a href="#">
+                                    <ls:readLink>hello</ls:readLink>
+                                </a>
+                            </div>
+
+                            <div class="col-sm-3">
+                                <small>
+                                    <a href="#">View Post</a>
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+
+                    <div class="col-lg-offset-1 col-lg-2">
+                        <img class="img-responsive" alt="dummy" src="index.jpeg"/>
+                    </div>
+
+                    <div class=" col-lg-9">
+                        <span>Uday Pratap Singh</span> <small class="text-muted">@uday
+                    5min</small> <a class="a-right" href="#" class="anchor">Grails</a>
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <small>
+                                    <a href="#">Download</a>
+                                </small>
+                            </div>
+
+                            <div class="col-sm-3">
+                                <small>
+                                    <a href="#">View full site</a>
+                                </small>
+                            </div>
+
+                            <div class="col-sm-4">
+                                <small>
+                                    <a href="#">Mark as read</a>
+                                </small>
+                            </div>
+
+                            <div class="col-sm-3">
+                                <small>
+                                    <a href="#">View Post</a>
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+
+                            <div class="row">
+                                <div class="col-lg-4 subform">Subscription</div>
+
+                                <div class="col-lg-offset-4 col-lg-4"><a class="a-right">View All</a></div>
+                            </div>
+                        </div>
+
+                        <div class="panel-body">
+                            <div class="row">
+                                <g:each in="${session.user?.getSubscribedTopics()}" var="subscribedTopics">
+
+                                    <div class="col-lg-offset-1 col-lg-2">
+                                        <img class="img-responsive" alt="dummy" src="index.jpeg"/>
+                                    </div>
+
+                                    <div class="col-lg-9">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <a href="#" class="anchor">${subscribedTopics?.name}</a>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-4">
+                                                <small class="text-muted">@${subscribedTopics?.createdBy}</small>
+                                            </div>
+
+                                            <div class="col-sm-4">
+                                                Subscriptions</div>
+
+                                            <div class="col-sm-4">Post</div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-4"><a>Unsubscribe</a></div>
+                                            %{--${subscribedTopics?.createdBy.getSubscriptionsCount()}--}%
+                                            <div class="col-sm-4"><a>50</a></div>
+
+                                            <div class="col-sm-4"><a>30</a></div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-4">
+                                                <select>
+                                                    <option selected="true">Serious</option>
+                                                    <option>VerySerious</option>
+                                                    <option>Casual</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="col-sm-4">
+                                                <select>
+                                                    <option>Private</option>
+                                                    <option selected="true">Public</option>
+                                                </select>
+
+                                            </div>
+
+                                            <div class="col-sm-4">
+                                                <a class="fa fa-envelope-o" data-toggle="modal" href="#SendInvite"
+                                                   aria-hidden="true"></a>
+                                                <a class="fa fa-file-o" data-toggle="modal" href="#CreateTopic"
+                                                   ariahidden="true"></a>
+                                                <a class="fa fa-trash" aria-hidden="true"></a>
+                                            </div>
+
+                                        </div>
+                                        <br><hr>
+
+                                    </div>
+
+                                </g:each>
+                                <hr>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+
+                            <div class="row">
+                                <div class="col-lg-4 subform">Trending Topics</div>
+
+                                <div class="col-lg-offset-4 col-lg-4"><a class="a-right">View All</a></div>
+                            </div>
+                        </div>
+
+                        <div class="panel-body">
+                            <g:each in="${bootcamp.Topic.getTrendingTopic()}" var="trendingTopics">
+
+                                <div class="row">
+
+                                    <div class="col-lg-offset-1 col-lg-2">
+                                        <img class="img-responsive" alt="dummy" src="index.jpeg"/>
+                                    </div>
+
+                                    <div class="col-lg-9">
+                                        <div class="row">
+                                            <div class=col-sm-12>
+                                                <a href="#" class="anchor">${trendingTopics.name}</a>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-4">
+                                                <small class="text-muted">@${trendingTopics.createdBy}</small>
+                                            </div>
+
+                                            <div class="col-sm-4">
+                                                Subscriptions</div>
+
+                                            <div class="col-sm-4">Post</div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-4"><a>Unsubscribe</a></div>
+
+                                            <div class="col-sm-4"><a>50</a></div>
+
+                                            <div class="col-sm-4"><a>${trendingTopics.count}</a></div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-4">
+                                                <select>
+                                                    <option selected="true">Serious</option>
+                                                    <option>VerySerious</option>
+                                                    <option>Casual</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="col-sm-4">
+                                                <select>
+                                                    <option>Private</option>
+                                                    <option selected="true">Public</option>
+                                                </select>
+
+                                            </div>
+
+                                            <div class="col-sm-4">
+                                                <i class="fa fa-envelope-o" aria-hidden="true"></i>
+                                                <i class="fa fa-file-o" aria-hidden="true"></i>
+                                                <i class="fa fa-trash" aria-hidden="true"></i>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <hr/>
+                                </div>
+                            </g:each>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </div>
     </div>
-</div>
 
 </div>
 
-
-<div class="col-sm-7">
-
-    <div class="panel panel-default">
-
-        <div class="panel panel-heading panel-default">
-            <h4>
-                <u>Recent Shares</u>
-            </h4>
-        </div>
-
-        <div class="panel panel-body col-sm-3">
-            <img src="vk.jpg" width="100" height="150" class="img-rounded img-responsive">
-        </div>
-
-        <div class="panel panel-body col-sm-9">
-            UDAY PRATAP SINGH
-            <div class="text-muted">
-                @uday 5min
-            </div>
-            <a href="self" class=" col-sm-8">Grails</a>
-            <br>
-            Learn how to add a search box inside a responsive navigation menu.
-            Learn how to add a search box inside a responsive navigation menu.
-        </div>
-
-
-        <div class="panel-body">
-            <div class="col-sm-12">
-
-            </div></div></div></div>
-
-</div>
-
-</div>
 </body>
 </html>
