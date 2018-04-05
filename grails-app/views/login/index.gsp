@@ -19,34 +19,59 @@
 
 </head>
 
+
 <body>
 
-<div class="row heading">
-    %{--<g:render template="/resource/show"/>--}%
+<div class=" container">
+    <div class="col-lg-6">
 
-</div>
+        <div class="col-lg-12" style="margin-top: 25px">
 
+            <g:render template="/resource/recentShares"></g:render>
 
-<div class="col-lg-6">
-    <div class="panel panel-default">
-        <div class="panel-heading">Login</div>
-
-        <div class="panel-body">
-            <g:render template="/user/login"/>
         </div>
-    </div>
-</div>
 
-<div class="col-lg-6">
-    <div class="panel panel-default">
-        <div class="panel-heading">Register</div>
+        <div class="col-lg-12" style="margin-top: 25px">
 
-        <div class="panel-body">
-            <g:render template="/user/register"/>
+            <g:render template="/resource/topPosts"></g:render>
+
         </div>
+
     </div>
+
+    <div class="col-lg-6">
+        <div class="panel panel-default">
+            <div class="panel-heading" style="background:#696969">
+
+                <p>
+
+                <h3 style="color:white">Login</h3>
+            </p>
+            </div>
+            <div class="panel-body">
+
+                <g:render template="/user/login"></g:render>
+            </div></div></div>
+
+    <div class="col-lg-6">
+        <div class="panel panel-default">
+            <div class="panel-heading" style="background:#696969">
+
+                <p>
+
+                <h3 style="color:white">Register</h3>
+            </p>
+            </div>
+
+            <div class="panel-body">
+
+                <g:render template="/user/register"></g:render>
+            </div></div></div>
 </div>
 
+</div>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 </body>
 </html>

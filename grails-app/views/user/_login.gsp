@@ -2,8 +2,6 @@
     <g:render template="/user/ForgotPassword"/>
 </div>
 
-
-
 <g:form class="form-horizontal" controller="login"
         action="loginHandler">
     <div class="form-group">

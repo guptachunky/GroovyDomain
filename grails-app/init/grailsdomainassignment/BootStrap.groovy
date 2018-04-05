@@ -18,59 +18,30 @@ class BootStrap {
     def init = { servletContext ->
 
         println AppConstants.PASSWORD
-
-//        5.times {
-//            User normal = new User()
-//            normal.setEmailId("chunks@gmail.com${it}")
-//            normal.setFirstName("chunks${it}")
-//            normal.setPassword("abcdg${it}")
-//            normal.setLastName("gupta${it}")
-//            normal.setUserName("chunky${it}")
-//            normal.setActive(true)
-//            normal.setAdmin(false)
-//            normal.validate()
-//            println normal.save(validate: false)
-//
-//        }
-//
-//        User normal = new User()
-//        normal.setEmailId("chunks@gmail.com")
-//        normal.setFirstName("chunks")
-//        normal.setPassword("abcdg")
-//        normal.setLastName("gupta")
-//        normal.setUserName("chunky")
-//        normal.setActive(true)
-//        normal.setAdmin(false)
-//        normal.validate()
-//        println normal.save(validate: false)
-
-//        User user = User.get(1)
-
-//        println user.getUserName()
-
-//        Topic topic = new Topic()
-//        topic.setVisibility(Visibility.Public)
-//        topic.setName("topicName")
-//        topic.setCreatedBy(normal)
-//        println topic.save()
-
-//
         addNormalAndAdmin()
         createTopic()
         createResource()
         subscribeTopics()
-//        createResourceRating()
-//        question27()
-        List<User> userList = User.getAll()
-        userList.each {
-            println it.firstName
-        }
-
         creatingReadingItems()
+        createResourceRating()
+//        question27()
 
+        List<User> userList = User.findAll()
+
+//        userList.each {
+//            User user=it
+//            it.readingItem.each {
+//                println("${user.userName}=====================================${it}")
+//            }
+//
+//        }
+
+//        List<Topic> topics = Topic.findAll()
+//        topics.each {
+//            println it.name
+//        }
 
 //        println(userList.first().getSubscribedTopics())
-
         //Question 1 for gorm 2
 //        ResourceSearchCo resourceSearchCo = new ResourceSearchCo(topicId: 1)
 //        List<Resource> resourceList = Resource.search(resourceSearchCo).list()
@@ -78,31 +49,71 @@ class BootStrap {
 //            println("---------------------" + it.description)
 //        }
 
-        println("--------------------------")
-        println Topic.getTrendingTopic().name
+//        println("--------------------------")
+//        println Topic.getTrendingTopic().name
 
-//        createReadingItemIfItDoesNotExistsInUsersReadingItem()
     }
+
+
+    def creatingReadingItems() {
+
+        List<User> userList = User.findAll()
+        userList.each {
+            List<Resource> resourceList = Resource.findAll()
+            User user = it
+            resourceList.each {
+
+                Topic topic = it.topic
+                if (topic.createdBy != user && it.user != user) {
+
+                    ReadingItem readingItem = new ReadingItem(user: user, isRead: true, resource: it)
+                    if (!readingItem.save(flush: true)) {
+                        log.error("Error while saving : $readingItem")
+                    } else {
+                        log.info("Saved Succesfully: $readingItem")
+                        user.addToReadingItem(readingItem)
+                    }
+                }
+            }
+        }
+
+    }
+
 
     void createResourceRating() {
 
-        List<User> userList = User.getAll()
-        userList.each {
-            User user ->
-                user.readingItem.each {
-                    if (!it.isRead && RatingResource.findAllByUser(user).size() == 0) {
-                        RatingResource resourceRating = new RatingResource(user: user, resource: it.resource, score: 4)
-                        resourceRating.validate()
-                        if (resourceRating.save()) {
-                            log.info("Saved Successfully")
-                            user.save()
-                        } else {
-                            log.error("${resourceRating.errors.getAllErrors()}")
-                        }
-                    }
-                }
-
+        Random random = new Random()
+        List<ReadingItem> readingItemList = ReadingItem.findAll()
+        println readingItemList.size()
+        readingItemList.each {
+            if (it.isRead) {
+                RatingResource resourceRating = new RatingResource(resource: it.resource, user: it.user, score: random.nextInt(6))
+                if (!resourceRating.save(flush: true)) {
+                    log.error("Error while saving : $resourceRating")
+                    resourceRating.errors.allErrors.each { println it }
+                } else
+                    log.info("Saved Successfully : $resourceRating")
+            }
         }
+
+//
+//        List<User> userList = User.getAll()
+//        userList.each {
+//            User user ->
+//                user.readingItem.each {
+//                    if (!it.isRead && RatingResource.findAllByUser(user).size() == 0) {
+//                        RatingResource resourceRating = new RatingResource(user: user, resource: it.resource, score: 4)
+//                        resourceRating.validate()
+//                        if (resourceRating.save(flush: true)) {
+//                            log.info("Saved Successfully")
+//                            user.save(flush: true)
+//                        } else {
+//                            log.error("${resourceRating.errors.getAllErrors()}")
+//                        }
+//                    }
+//                }
+//
+//        }
 
     }
 
@@ -126,43 +137,16 @@ class BootStrap {
             RatingResource resourceRating ->
                 if (ReadingItem.findAllByUserAndResource(resourceRating.user, resourceRating.resource).size() == 0) {
                     ReadingItem readingItem = new ReadingItem(user: resourceRating.user, resource: resourceRating.resource, isRead: false)
-                    if (readingItem.save()) {
+                    if (readingItem.save(flush: true)) {
                         log.info("Saved Successfully")
                         resourceRating.resource.addToReadingItems(readingItem)
-                        resourceRating.resource.save()
-                        resourceRating.user.save()
+                        resourceRating.resource.save(flush: true)
+                        resourceRating.user.save(flush: true)
                     } else {
                         log.error("Error:- ${readingItem.errors.getAllErrors()}")
                     }
                 }
         }
-    }
-
-    def creatingReadingItems() {
-
-        List<User> users = User.getAll()
-        users.each {
-            User user ->
-                user.subscriptions.each {
-                    it.topic.resources.each {
-                        if (it.user != user && ReadingItem.findAllByResourceAndUser(it, user).size() == 0) {
-                            ReadingItem readingItem = new ReadingItem(user: user, isRead: true, resource: it)
-
-
-                            if (!readingItem.save(flush: true)) {
-                                log.error("Error while saving : $readingItem")
-                            } else {
-                                log.info("Saved Succesfully: $readingItem")
-                              }
-
-//                            readingItem.save(validate: false)
-                        }
-
-                    }
-                }
-        }
-
-
     }
 
 
@@ -183,9 +167,7 @@ class BootStrap {
                     subscription.setUser(user)
                     subscription.setTopic(it)
                     subscription.validate()
-                    subscription.validate()
-                    log.error("Error:${subscription.errors.getAllErrors()}")
-                    println subscription.save()
+                    subscription.save(flush: true)
                 }
             }
 
@@ -206,7 +188,7 @@ class BootStrap {
         normal.setUserName("chunkyGupta123")
         normal.setActive(true)
         normal.setAdmin(false)
-        println normal.save(validate: false)
+        println normal.save(validate: false, flush: true)
 
 
         Topic topic = new Topic()
@@ -224,20 +206,23 @@ class BootStrap {
                 Topic myTopic = it
                 Resource linkResource = new LinkResource(url: "https://www.google.co.in/", description: "Description ", topic: myTopic, user: myTopic.createdBy)
                 linkResource.validate()
-                log.error("Resource Error: ${linkResource.errors.allErrors}")
-                linkResource.save()
+                linkResource.save(flush: true)
+                it.addToResources(linkResource)
+                it.createdBy.addToResources(linkResource)
 
                 Resource documentResource = new DocumentResouce(filePath: "file Path", description: "DEXKNDJVSK", user: myTopic.createdBy, topic: myTopic)
                 documentResource.validate()
-                log.error("Resource Error: ${documentResource.errors.allErrors}")
-                documentResource.save()
+                documentResource.save(flush: true)
+                it.addToResources(documentResource)
+                it.createdBy.addToResources(documentResource)
+
             }
 
         }
 
     }
 
-    // =================Create Resource
+// =================Create Resource
     def createTopic() {
 
         List<User> users = User.getAll()
@@ -247,11 +232,11 @@ class BootStrap {
             if (count == 0) {
                 5.times {
                     Topic topic = new Topic()
-                    topic.setVisibility(Visibility.Private)
-                    topic.setName("topic ${it}abc")
+                    topic.setVisibility(Visibility.Public)
+                    topic.setName("topic by ${user.userName}  ${it}abc")
                     topic.setCreatedBy(user)
 
-                    println topic.save()
+                    println topic.save(flush: true)
                 }
             }
         }
@@ -280,7 +265,7 @@ class BootStrap {
         admin.setUserName("chunkyGupta")
         admin.setActive(true)
         admin.setAdmin(true)
-        admin.save(failOnError: true)
+        admin.save(flush: true)
 
     }
 

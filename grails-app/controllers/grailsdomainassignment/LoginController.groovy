@@ -6,13 +6,13 @@ import utilities.AppConstants
 class LoginController {
 
     def index() {
-        if (session.user) {
-            log.info("REDIRECTING TO USER INDEX")
-            forward(controller: "User", action: "index")
-        } else {
-            log.info("NO SESSION USER FOUND")
-            render(view: 'index')
-        }
+//        if (session.user) {
+//            log.info("REDIRECTING TO USER INDEX")
+//            forward(controller: "User", action: "index")
+//        } else {
+//            log.info("NO SESSION USER FOUND")
+//            render(view: 'index')
+//        }
     }
 
     def loginHandler(String userName, String password) {

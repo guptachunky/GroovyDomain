@@ -47,7 +47,7 @@
     </head>
 
 <body>
-
+${session.user.emailId}
 <div class="modal fade" id="create" role="dialog">
     <g:render template="/topic/create"/>
 </div>
@@ -154,97 +154,100 @@
                     </div>
                 </div>
 
-
+                ${bootcamp.Resource.getPosts(session.user).size()}
                 <div class="col-lg-6" style="left: 20px;">
                     <div class="panel panel-default">
                         <div class="panel-heading">Inbox</div>
 
                         <div class="panel-body">
+                            <g:each in="${bootcamp.Resource.getPosts(session.user)}" var="post">
 
-                            <div class="col-lg-offset-1 col-lg-2">
-                                <img class="img-responsive" alt="dummy" src="index.jpeg"/>
-                            </div>
-
-                            <div class="col-lg-9">
-                                <span>Uday Pratap Singh</span> <small class="text-muted">@uday
-                            5min</small> <a class="a-right" href="#" class="anchor">Grails</a>
-
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.
-                                        </p>
-                                    </div>
+                                <div class="col-lg-offset-1 col-lg-2">
+                                    <img class="img-responsive" alt="dummy" src="index.jpeg"/>
                                 </div>
 
+                                <div class="col-lg-9">
+                                    <span>${post.user}</span> <small class="text-muted">@uday
+                                5min</small> <a class="a-right" href="#" class="anchor">Grails</a>
 
-                                <div class="row">
-                                    <div class="col-sm-2">
-                                        <small><a href="#">Download</a>
-                                        </small>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <p>
+                                                ${post.description}
+                                            </p>
+                                        </div>
                                     </div>
 
-                                    <div class="col-sm-3">
-                                        <small>
-                                            <a href="#">View full site</a>
-                                        </small>
-                                    </div>
 
-                                    <div class="col-sm-4">
-                                        <a href="#">
-                                            <ls:readLink readingItem="${resource}">hello</ls:readLink>
-                                        </a>
-                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-2">
+                                            <small><a href="#">Download</a>
+                                            </small>
+                                        </div>
 
-                                    <div class="col-sm-3">
-                                        <small>
-                                            <a href="#">View Post</a>
-                                        </small>
-                                    </div>
-                                </div>
-                            </div>
-                            <hr>
+                                        <div class="col-sm-3">
+                                            <small>
+                                                <a href="#">View full site</a>
+                                            </small>
+                                        </div>
 
-                            <div class="col-lg-offset-1 col-lg-2">
-                                <img class="img-responsive" alt="dummy" src="index.jpeg"/>
-                            </div>
+                                        <div class="col-sm-4">
+                                            <g:link controller="resource" action="changeIsRead" id="${post.id}">
+                                                <ls:readLink read="${post.id}"></ls:readLink>
+                                            </g:link>
+                                        </div>
 
-                            <div class=" col-lg-9">
-                                <span>Uday Pratap Singh</span> <small class="text-muted">@uday
-                            5min</small> <a class="a-right" href="#" class="anchor">Grails</a>
-
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.
-                                        </p>
+                                        <div class="col-sm-3">
+                                            <small>
+                                                <a href="#">View Post</a>
+                                            </small>
+                                        </div>
                                     </div>
                                 </div>
+                                <hr>
+                            </g:each>
 
-                                <div class="row">
-                                    <div class="col-sm-2">
-                                        <small>
-                                            <a href="#">Download</a>
-                                        </small>
-                                    </div>
+                        %{--<div class="col-lg-offset-1 col-lg-2">--}%
+                        %{--<img class="img-responsive" alt="dummy" src="index.jpeg"/>--}%
+                        %{--</div>--}%
 
-                                    <div class="col-sm-3">
-                                        <small>
-                                            <a href="#">View full site</a>
-                                        </small>
-                                    </div>
+                        %{--<div class=" col-lg-9">--}%
+                        %{--<span>Uday Pratap Singh</span> <small class="text-muted">@uday--}%
+                        %{--5min</small> <a class="a-right" href="#" class="anchor">Grails</a>--}%
 
-                                    <div class="col-sm-4">
-                                        <small>
-                                            <a href="#">Mark as read</a>
-                                        </small>
-                                    </div>
+                        %{--<div class="row">--}%
+                        %{--<div class="col-sm-12">--}%
+                        %{--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.--}%
+                        %{--</p>--}%
+                        %{--</div>--}%
+                        %{--</div>--}%
 
-                                    <div class="col-sm-3">
-                                        <small>
-                                            <a href="#">View Post</a>
-                                        </small>
-                                    </div>
-                                </div>
-                            </div>
+                        %{--<div class="row">--}%
+                        %{--<div class="col-sm-2">--}%
+                        %{--<small>--}%
+                        %{--<a href="#">Download</a>--}%
+                        %{--</small>--}%
+                        %{--</div>--}%
+
+                        %{--<div class="col-sm-3">--}%
+                        %{--<small>--}%
+                        %{--<a href="#">View full site</a>--}%
+                        %{--</small>--}%
+                        %{--</div>--}%
+
+                        %{--<div class="col-sm-4">--}%
+                        %{--<small>--}%
+                        %{--<a href="#">Mark as read</a>--}%
+                        %{--</small>--}%
+                        %{--</div>--}%
+
+                        %{--<div class="col-sm-3">--}%
+                        %{--<small>--}%
+                        %{--<a href="#">View Post</a>--}%
+                        %{--</small>--}%
+                        %{--</div>--}%
+                        %{--</div>--}%
+                        %{--</div>--}%
 
                         </div>
                     </div>
@@ -277,7 +280,7 @@
 
                                     <div class="col-lg-9">
                                         <span>${session.user}</span> <small
-                                            class="text-muted">@${session.user.username.subString(0, 4}
+                                            class="text-muted">@${session.user?.userName.substring(0, 4)}
                                         5min</small> <a class="a-right" href="#" class="anchor">Grails</a>
 
                                         <div class="row">
@@ -338,4 +341,5 @@
         </div>
 
     </div></div></body>
+
 </html>

@@ -13,11 +13,11 @@ class LinksharingTagLib {
 
 
     def readLink = { attr, body ->
-
-        ReadingItem readingItem = ReadingItem.findByUserAndResource(session.user, attr.resource)
+        Resource resource = Resource.get(attr.read)
+        ReadingItem readingItem = ReadingItem.findByResourceAndUser(resource, session.user)
 
         String value = ""
-        if (readingItem && readingItem.isRead) {
+        if (readingItem && readingItem?.isRead) {
             value = "Mark As Unread"
         } else {
             value = "Mark As Read"

@@ -1,8 +1,8 @@
 package viewObject
 
 import bootcamp.User
+import constant.Visibility
 
-import java.beans.Visibility
 
 class TopicVO {
     Integer id

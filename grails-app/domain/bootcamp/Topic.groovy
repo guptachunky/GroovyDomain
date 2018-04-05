@@ -14,7 +14,7 @@ class Topic {
 
     static hasMany = [subscriptions: Subscription, resources: Resource]
 
-    static TopicVO getTrendingTopic() {
+    static List<TopicVO> getTrendingTopic() {
 
         List<Topic> topicList = Resource.createCriteria().list {
             projections {
@@ -90,7 +90,6 @@ class Topic {
         } else
             false
     }
-
 
 
 }

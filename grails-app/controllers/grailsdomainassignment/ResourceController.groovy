@@ -19,23 +19,30 @@ class ResourceController {
 
     def show() {
 
-        Boolean canView =params.resource.canViewedBy(session.user)
+        Boolean canView = params.resource.canViewedBy(session.user)
 
     }
 
 
     def changeIsRead() {
-        Resource resource = params.resource
-        User user = session.user
+        Resource resource = Resource.get(params.id)
+        ReadingItem readingItem = ReadingItem.findByResourceAndUser(resource, session.user)
+        if (readingItem) {
+            readingItem.isRead = false
+            readingItem.save()
+        } else {
+            new ReadingItem(user: session.user, resource: resource, isRead: true).save()
 
-        ReadingItem readingItem = ReadingItem.findByUserAndResource(user, resource)
+        }
+        render(view: "/resource/search")
     }
 
 
     def search() {
 
-        flash.error = "No Search Criteria"
+//        flash.error = "No Search Criteria"
 
+//        render(text: "render")
 
     }
 

@@ -88,6 +88,25 @@ abstract class Resource {
     }
 
 
+    static List<Resource> getRecentShares() {
+
+        List<Resource> recentShares = Resource.createCriteria().list {
+            order("dateCreated", "desc")
+            maxResults(2)
+
+        }
+        println("about to return")
+        return recentShares
+    }
+
+
+    static List<Resource> getPosts(User user) {
+        List<Resource> resourceList = Resource.createCriteria().list {
+            eq("user", user)
+        }
+        return resourceList
+    }
+
     static List<Resource> getTopPost() {
 
         List resourceIds = RatingResource.createCriteria().list {

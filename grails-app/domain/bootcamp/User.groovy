@@ -101,7 +101,7 @@ class User {
         return ratingResource.score
     }
 
-    Boolean isSubscribed(Topic topic) {
+    static Boolean isSubscribed(Topic topic) {
         List<User> userList = []
         userList = Subscription.createCriteria().list {
             projections {
