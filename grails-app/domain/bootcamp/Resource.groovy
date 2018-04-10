@@ -82,6 +82,14 @@ abstract class Resource {
     }
 
 
+    List<User> getSubscribedUsers() {
+        List listOfResources = []
+        listOfResources = Resource.findByTopic(this.topic)
+        listOfResources
+
+    }
+
+
     static String findResource() {
 
         this.getClass().getName()
@@ -122,6 +130,6 @@ abstract class Resource {
         List<Resource> resources = Resource.getAll(resourceIds)
         return resources
 
-
     }
+
 }

@@ -80,9 +80,19 @@ ${session.user.emailId}
                         <div class="panel-heading">
 
                             <div class="row">
-                                <div class="col-lg-4 subform">Trending Topics</div>
+                                <div class="panel-heading" style="background:#696969">
 
-                                <div class="col-lg-offset-4 col-lg-4"><a class="a-right">View All</a></div>
+                                    <p>
+
+                                    <h3>
+
+                                        Trending Topics
+                                        %{--<div class="col-lg-offset-4 col-lg-4"><a class="a-right">View All</a></div>--}%
+
+                                    </h3>
+                                </p>
+                                </div>
+
                             </div>
                         </div>
 
@@ -157,7 +167,15 @@ ${session.user.emailId}
                 ${bootcamp.Resource.getPosts(session.user).size()}
                 <div class="col-lg-6" style="left: 20px;">
                     <div class="panel panel-default">
-                        <div class="panel-heading">Inbox</div>
+                        %{--<div class="panel-heading">Inbox</div>--}%
+                        <div class="panel-heading" style="background:#696969">
+
+                            <p>
+
+                            <h3 style="color:white">INBOX</h3>
+                        </p>
+                        </div>
+
 
                         <div class="panel-body">
                             <g:each in="${bootcamp.Resource.getPosts(session.user)}" var="post">
@@ -204,50 +222,8 @@ ${session.user.emailId}
                                         </div>
                                     </div>
                                 </div>
-                                <hr>
+                                <hr><br>
                             </g:each>
-
-                        %{--<div class="col-lg-offset-1 col-lg-2">--}%
-                        %{--<img class="img-responsive" alt="dummy" src="index.jpeg"/>--}%
-                        %{--</div>--}%
-
-                        %{--<div class=" col-lg-9">--}%
-                        %{--<span>Uday Pratap Singh</span> <small class="text-muted">@uday--}%
-                        %{--5min</small> <a class="a-right" href="#" class="anchor">Grails</a>--}%
-
-                        %{--<div class="row">--}%
-                        %{--<div class="col-sm-12">--}%
-                        %{--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.--}%
-                        %{--</p>--}%
-                        %{--</div>--}%
-                        %{--</div>--}%
-
-                        %{--<div class="row">--}%
-                        %{--<div class="col-sm-2">--}%
-                        %{--<small>--}%
-                        %{--<a href="#">Download</a>--}%
-                        %{--</small>--}%
-                        %{--</div>--}%
-
-                        %{--<div class="col-sm-3">--}%
-                        %{--<small>--}%
-                        %{--<a href="#">View full site</a>--}%
-                        %{--</small>--}%
-                        %{--</div>--}%
-
-                        %{--<div class="col-sm-4">--}%
-                        %{--<small>--}%
-                        %{--<a href="#">Mark as read</a>--}%
-                        %{--</small>--}%
-                        %{--</div>--}%
-
-                        %{--<div class="col-sm-3">--}%
-                        %{--<small>--}%
-                        %{--<a href="#">View Post</a>--}%
-                        %{--</small>--}%
-                        %{--</div>--}%
-                        %{--</div>--}%
-                        %{--</div>--}%
 
                         </div>
                     </div>
@@ -264,9 +240,17 @@ ${session.user.emailId}
                         <div class="panel-heading">
 
                             <div class="row">
-                                <div class="col-lg-4 subform">Subscription</div>
+                                %{--<div class="col-lg-4 subform">Subscription</div>--}%
 
-                                <div class="col-lg-offset-4 col-lg-4"><a class="a-right">View All</a></div>
+                                <div class="panel-heading" style="background:#696969">
+
+                                    <p>
+
+                                    <h3 style="color:white">Subscription</h3>
+                                </p>
+                                </div>
+
+                                %{--<div class="col-lg-offset-4 col-lg-4"><a class="a-right">View All</a></div>--}%
                             </div>
                         </div>
 
@@ -324,11 +308,12 @@ ${session.user.emailId}
                                             </div>
                                         </div>
                                     </div>
-                                    <hr>
 
                                     <div class="col-lg-offset-1 col-lg-2">
                                         <img class="img-responsive" alt="dummy" src="index.jpeg"/>
                                     </div>
+                                    <br><hr>
+                                    <hr>
 
                                 </g:each>
                                 <hr>

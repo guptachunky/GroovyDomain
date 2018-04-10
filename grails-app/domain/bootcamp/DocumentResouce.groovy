@@ -6,6 +6,8 @@ class DocumentResouce extends Resource {
     Date dateCreated
     Date lastUpdated
 
+    String contentType
+    static transients = ['contentType']
     static constraints = {
 
     }

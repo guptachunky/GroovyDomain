@@ -66,6 +66,18 @@ class User {
         }
     }
 
+
+    List<String> getUserTopics() {
+        List<String> userTopics = []
+        if (this.topics) {
+            this.topics.each {
+                userTopics.add(it.name)
+            }
+        }
+        return userTopics
+    }
+
+
     List getSubscribedTopics() {
         List<Topic> subscribedTopics = []
         this.subscriptions.each {

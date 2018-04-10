@@ -1,5 +1,5 @@
 
-    <g:each in="${bootcamp.Resource.topPost()}" var="post">
+    <g:each in="${bootcamp.Resource.getTopPost()}" var="post">
         <div class="row">
             <div class=" col-lg-offset-1 col-lg-2">
                 <img class="img-responsive" alt="dummy" src="index.jpeg"/>
@@ -35,6 +35,17 @@
                 <div class="col-sm-offset-2 col-sm-4">
                     <a href="#">View Post</a>
                 </div>
+                <g:if test="${session.user}">
+
+                    <div class="col-sm-offset-2 col-sm-4">
+                        <a href="#">Edit</a>
+                    </div>
+
+                    <div class="col-sm-offset-2 col-sm-4">
+                        <a href="#">Delete</a>
+                    </div>
+                </g:if>
+
             </div>
         </div>
     </g:each>

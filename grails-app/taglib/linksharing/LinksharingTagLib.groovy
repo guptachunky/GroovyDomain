@@ -11,6 +11,14 @@ class LinksharingTagLib {
     //static encodeAsForTags = [tagName: [taglib:'html'], otherTagName: [taglib:'none']]
     static namespace = "ls"
 
+    def userImage = { attr, body ->
+
+        if (session.user.photo) {
+            out << " <img class='img-responsive'alt='dummy' height='64' width='64' src='data:image/png;base64,${session.user?.photo.encodeBase64()}'/>"
+
+        } else
+            out << " <img class='img-responsive'alt='dummy' height='64' width='64' src='data:image/png;base64,${session.user?.photo.encodeBase64()}'/>"
+    }
 
     def readLink = { attr, body ->
         Resource resource = Resource.get(attr.read)

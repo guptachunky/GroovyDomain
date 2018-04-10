@@ -1,11 +1,17 @@
 package grailsdomainassignment
 
+import DTO.EmailDTO
 import bootcamp.Subscription
 import bootcamp.Topic
+import bootcamp.User
 import constant.Visibility
+import linksharing.EmailService
+import utilities.Util
 
 
 class UserController {
+
+    EmailService emailService
 
     def index() {
 //        redirect(controller: 'topic', action: 'index')
@@ -13,7 +19,43 @@ class UserController {
     }
 
 
-    def register() {
+    def register(User user) {
+
+
+        def file = params.photo
+        user.photo = file.bytes
+        user.active = true
+        user.admin = false
+
+        if (user.save()) {
+
+            flash.message = "Successfully User Stored"
+            session.user = user
+        } else {
+            flash.error = "error in register"
+        }
+
+    }
+
+
+    def forgotPassword(String emailId) {
+        User user = User.findByEmailId(emailId)
+        if (user && user.active) {
+
+            String newPassword = new Util().getRandomPassword()
+            EmailDTO emailDTO = new EmailDTO(to: emailId, subject: "For LinkSharing Password", from: "rg488592@gmail.com", content: "hey Therer your New Password : ${newPassword}")
+
+            emailService.sendMail(emailDTO)
+
+            flash.message = "password sent"
+            render(" New Password Is Sent To Registered Email Id")
+        } else {
+            render("Invalid email id")
+        }
+    }
+
+
+    def userProfile() {
 
     }
 
@@ -40,4 +82,17 @@ class UserController {
         }
 
     }
+
+
+    def image(Long id) {
+        User user = User.get(id)
+        if (user) {
+            render(user.photo)
+
+        } else {
+            render("dummy photo")
+        }
+
+    }
+
 }

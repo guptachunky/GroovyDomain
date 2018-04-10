@@ -1,32 +1,69 @@
-<form class="form-inline">
+<g:form class="form-horizontal" controller="user"
+        action="register" enctype="multipart/form-data">
 
-    <label class="col-sm-4" for="first">FirstName:*</label>
-    <input type="text" name="firstName" class="form-control col-sm-8">
+    <div class="form-group">
+        <label class="control-label col-sm-4" for="firstName">First Name*</label>
 
-    <label class="col-sm-4" for="last">LastName:*</label>
-    <input type="text" name="lastname" class="form-control col-sm-8">
+        <div class="col-sm-8">
+            <g:textField type="text" class="form-control"
+                         placeholder="First Name" name="firstName"/>
+        </div>
+    </div>
 
-    <label class="col-sm-4" for="email">Email:*</label>
-    <input type="text" name="email" class="form-control col-sm-8">
+    <div class="form-group">
+        <label class="control-label col-sm-4" for="lastName">Last Name*:</label>
 
-    <label class="col-sm-4" for="user">UserName:*</label>
-    <input type="text" name="userName" class="form-control col-sm-8">
+        <div class="col-sm-8">
+            <g:textField type="text" class="form-control"
+                         placeholder="Last Name" name="lastName"/>
+        </div>
+    </div>
 
-    <label class="col-sm-4" for="pass">PassWord:*</label>
-    <input type="password" name="Password" class="form-control col-sm-8">
+    <div class="form-group">
+        <label class="control-label col-sm-4">Email*:</label>
 
-    <label class="col-sm-4" for="confirm">Confirm :*</label>
-    <input type="text" name="confirm" class="form-control col-sm-8">
+        <div class="col-sm-8">
+            <input type="email" class="form-control" name="emailId" placeholder="Enter Email">
+        </div>
+    </div>
 
-    <br>
+    <div class="form-group">
+        <label class="control-label col-sm-4">Username*:</label>
 
-    <label class="col-sm-4" for="Photo">Photo : *</label>
-    <input type="text" name="photo" class="form-control col-sm-2">
-    <input type="button" name="" value="Browse" class="btn btn-success col-sm-offset-7">
-</br>
-</br>
-</br>
-</br>
-    <input type="submit" name="user" class="btn btn-success col-sm-offset-7"></br>
+        <div class="col-sm-8">
+            <input type="text" class="form-control" name="userName" placeholder="Enter Username">
+        </div>
+    </div>
 
-</form>
+    <div class="form-group">
+        <label class="control-label col-sm-4">Password*:</label>
+
+        <div class="col-sm-8">
+            <input type="password" class="form-control" name="password" placeholder="Enter Password">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-sm-4">Confirm Password*:</label>
+
+        <div class="col-sm-8">
+            <input type="password" class="form-control" name="confirmPassword" placeholder="Enter Confirm Password">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-sm-4">Photo:</label>
+
+        <div class="col-sm-8">
+            <input type="file" name="photo"/>
+            <br/><br/>
+        </div>
+    </div>
+
+    <div class="form-group">
+
+        <div class="col-sm-offset-7 col-sm-4">
+            <button type="submit" class="btn btn-default">Register</button>
+        </div>
+    </div>
+</g:form>

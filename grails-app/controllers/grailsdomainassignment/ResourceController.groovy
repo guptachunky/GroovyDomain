@@ -49,4 +49,9 @@ class ResourceController {
     def notFoundException(Exception exception) {
         log.error "Exception occurred. ${exception?.message}", exception
     }
+
+
+    protected def addToReadingItems(Resource resource) {
+
+    }
 }

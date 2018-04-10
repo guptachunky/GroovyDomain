@@ -1,6 +1,19 @@
 package grailsdomainassignment
 
+import bootcamp.User
+
 class AwaiController {
 
-    def index() {}
+    def index() {
+
+
+//        User user = User.get(4)
+//       src="data:image/png;base64,${session.user?.photo.encodeBase64()} "
+
+//        Byte[] photo = user.photo
+        render text: "${session.user?.photo.encodeBase64()}", contentType: 'image/jpeg'
+
+//        render(view: "myView")
+    }
+
 }

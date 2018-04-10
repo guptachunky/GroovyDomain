@@ -248,7 +248,7 @@ class BootStrap {
     def addNormalAndAdmin() {
 
         User normal = new User()
-        normal.setEmailId("chunks@gmail.com")
+        normal.setEmailId("chunkygupta95@gmail.com")
         normal.setFirstName("chunks")
         normal.setPassword("abcdg")
         normal.setLastName("gupta")

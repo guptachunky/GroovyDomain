@@ -117,7 +117,7 @@
                 <div class="panel-body">
 
                     <div class="col-lg-offset-1 col-lg-2">
-                        <img class="img-responsive" alt="dummy" src="index.jpeg"/>
+                        <img class="img-responsive" alt="dummy"  height="64" width="64" src="data:image/png;base64,${session.user?.photo.encodeBase64()} "/>
                     </div>
 
                     <div class="col-lg-9">
@@ -162,7 +162,7 @@
                     <hr>
 
                     <div class="col-lg-offset-1 col-lg-2">
-                        <img class="img-responsive" alt="dummy" src="index.jpeg"/>
+                        <img class="img-responsive" alt="dummy"  height="64" width="64" src="data:image/png;base64,${session.user?.photo.encodeBase64()} "/>
                     </div>
 
                     <div class=" col-lg-9">
@@ -294,7 +294,6 @@
                 </div>
             </div>
         </div>
-
 
         <div class="container">
             <div class="row">

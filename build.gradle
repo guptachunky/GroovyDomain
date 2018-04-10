@@ -57,6 +57,10 @@ dependencies {
     testCompile "org.grails:grails-gorm-testing-support"
     testCompile "org.grails:grails-web-testing-support"
     testCompile "org.grails.plugins:geb:1.1.2"
+    compile "org.grails.plugins:mail:2.0.0"
+    compile "org.grails.plugins:quartz:2.0.13"
+
+
     compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.6'
     testRuntime "org.seleniumhq.selenium:selenium-chrome-driver:2.47.1"
     testRuntime "org.seleniumhq.selenium:selenium-htmlunit-driver:2.47.1"

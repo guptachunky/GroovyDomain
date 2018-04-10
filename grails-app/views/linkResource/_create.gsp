@@ -33,7 +33,7 @@
 
         <div class="col-sm-10 ">
             <select class="form-control" name="topic" id="topicLink">
-                <g:each in="${session.user?.subscriptions}" var="subscribedTopics">
+                <g:each in="${session.user?.getSubscribedTopics()}" var="subscribedTopics">
 
                     <option value="${subscribedTopics?.topic?.name}">${subscribedTopics?.topic?.name}</option>
                 </g:each>
