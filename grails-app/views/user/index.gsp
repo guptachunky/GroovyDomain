@@ -20,7 +20,26 @@
     </title>
     <meta name="layout" content="main">
 
-    <div class="glyphicon glyphicon-user pull-right" style="margin-left: 30px; margin-top: 5px; "></div>
+    <div class="pull-right" style="   margin-left: 30px; margin-top: 5px; ">
+
+        <g:if test="${session.user}">
+
+            <li class="dropdown  col-lg-3" style="padding: 0px">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-user"
+                                                                              style="font-size:24px"></i>
+                    ${session.user.getFirstName()}
+                    <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><g:link controller="user" action="editProfile">Profile</g:link></li>
+                    <g:if test="${session.user.admin}">
+                        <li><g:link controller="user" action="showUserListToAdmin">Users</g:link></li>
+                    </g:if>
+                    <li><g:link controller="login" action="logout">Logout</g:link></li>
+                </ul>
+            </li>
+        </g:if>
+
+    </div>
 
 
 
@@ -38,7 +57,7 @@
     </button>
 
     <button type="img" class="glyphicon glyphicon-envelope pull-right" data-toggle="modal"
-            style="margin-left: 10px;" data-target="#myModal5">
+            style=" margin-left: 10px;" data-target="#myModal5">
 
     </button>
 
@@ -95,12 +114,12 @@
 
                         <div class="row">
                             <div class="col-sm-6">
-                                <a href="#">20</a>
+                                <a href="#">${session.user?.topics.size()}</a>
 
                             </div>
 
                             <div class="col-sm-6">
-                                <a href="#">10</a>
+                                <a href="#">${session.user?.subscriptions.size()}</a>
 
                             </div>
                         </div>
@@ -110,14 +129,17 @@
         </div>
 
 
-        <div class="col-lg-6" style="left: 20px;">
+        <div class="col-lg-6" style=" left: 20px;">
             <div class="panel panel-default">
                 <div class="panel-heading">Inbox</div>
 
                 <div class="panel-body">
 
                     <div class="col-lg-offset-1 col-lg-2">
-                        <img class="img-responsive" alt="dummy"  height="64" width="64" src="data:image/png;base64,${session.user?.photo.encodeBase64()} "/>
+                        %{--<img class="img-responsive" alt="dummy" height="64" width="64"--}%
+                             %{--src="data:image/png;base64,${session.user?.photo.encodeBase64()} "/>--}%
+                        <img class="img-responsive" alt="dummy" height="64" width="64" src=" "/>
+
                     </div>
 
                     <div class="col-lg-9">
@@ -144,9 +166,6 @@
                             </div>
 
                             <div class="col-sm-4">
-                                %{--<small>--}%
-                                %{--<a href="#">Mark as read</a>--}%
-                                %{--</small>--}%
                                 <a href="#">
                                     <ls:readLink>hello</ls:readLink>
                                 </a>
@@ -162,7 +181,11 @@
                     <hr>
 
                     <div class="col-lg-offset-1 col-lg-2">
-                        <img class="img-responsive" alt="dummy"  height="64" width="64" src="data:image/png;base64,${session.user?.photo.encodeBase64()} "/>
+                        %{--<img class="img-responsive" alt="dummy" height="64" width="64"--}%
+                             %{--src=" data:image/png;base64,${session.user?.photo.encodeBase64()}  "/>--}%
+
+                        <img class="img-responsive" alt="dummy" height="64" width="64" src=""/>
+
                     </div>
 
                     <div class=" col-lg-9">
@@ -250,9 +273,11 @@
                                         <div class="row">
                                             <div class="col-sm-4"><a>Unsubscribe</a></div>
                                             %{--${subscribedTopics?.createdBy.getSubscriptionsCount()}--}%
-                                            <div class="col-sm-4"><a>50</a></div>
+                                            <div class="col-sm-4"><a>
+                                        ${subscribedTopics.subscriptions.size()}
+                                        </a></div>
 
-                                            <div class="col-sm-4"><a>30</a></div>
+                                            <div class="col-sm-4"><a>${subscribedTopics.resources.size()}</a></div>
                                         </div>
 
                                         <div class="row">

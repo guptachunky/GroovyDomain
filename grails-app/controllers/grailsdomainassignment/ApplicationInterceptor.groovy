@@ -10,6 +10,11 @@ class ApplicationInterceptor {
     }
 
     boolean before() {
+
+        if (!session.user) {
+            flash.error = "NO ACTIVE SESSION"
+            false
+        }
         log.info("ACTION AND CONTROLLER LOG: ${params.toString()}")
 
         true

@@ -1,21 +1,35 @@
 package grailsdomainassignment
 
 import DTO.EmailDTO
+import bootcamp.ReadingItem
+import bootcamp.Resource
 import bootcamp.Subscription
 import bootcamp.Topic
 import bootcamp.User
 import constant.Visibility
 import linksharing.EmailService
+import linksharing.UnreadItemService
+import linksharing.UserService
+import org.springframework.context.MessageSource
 import utilities.Util
+import viewObject.UserVO
 
 
 class UserController {
 
+    MessageSource messageSource
+    UnreadItemService unreadItemService
     EmailService emailService
+    UserService userService
 
     def index() {
-//        redirect(controller: 'topic', action: 'index')
-//        //render(text: "${session.user.userName}")
+
+        if (session.user) {
+            List<Resource> resourceList = unreadItemService.inbox(session.user)
+            render(view: "index", model: [resourceList: resourceList])
+        } else
+            redirect(controller: 'login', action: 'index')
+
     }
 
 
@@ -26,6 +40,12 @@ class UserController {
         user.photo = file.bytes
         user.active = true
         user.admin = false
+
+//        if(user.hasErrors()){
+//            user.errors.fieldErrors.join()
+//
+//        }
+
 
         if (user.save()) {
 
@@ -60,7 +80,6 @@ class UserController {
     }
 
     def show(Integer id) {
-//        render(text: "${params.id}")
         Integer myId = (Integer) params.id
         Topic topic = Topic.get(myId)
         if (!topic) {
@@ -93,6 +112,37 @@ class UserController {
             render("dummy photo")
         }
 
+    }
+
+
+    def changePassword() {
+        String oldPassword = params.oldPassword
+        String newPassword = params.updatedPassword
+        String confirmNewPassword = params.updatedConfirmPassword
+
+        User user = session.user
+        if (userService.changePassword(oldPassword, newPassword, confirmNewPassword,user)) {
+            render(text: "Successfull")
+        } else {
+            render(text: "UnsuccessFull")
+        }
+
+    }
+
+
+    def updateUser() {
+        if (userService.updateProfile(params, session.user)) {
+            flash.message = "Update Successful"
+            render(text: "Success")
+        } else
+            flash.error = "Unable To Update "
+        render(text: "failure")
+    }
+
+
+    def showUserListToAdmin() {
+        List<UserVO> allUsers = userService.showAllUsers()
+        render(view: '/user/adminView', model: [allUsers: allUsers])
     }
 
 }

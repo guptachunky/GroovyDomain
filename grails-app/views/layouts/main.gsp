@@ -26,6 +26,8 @@
                             <input id="dashBoardHeaderSearchTag" type="search" class="form-control"
                                    placeholder="search"/>
                             <span class="input-group-addon glyphicon glyphicon-remove-sign"></span>
+
+
                         </div>
                     </div>
                 </div>

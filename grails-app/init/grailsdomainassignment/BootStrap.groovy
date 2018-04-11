@@ -28,29 +28,6 @@ class BootStrap {
 
         List<User> userList = User.findAll()
 
-//        userList.each {
-//            User user=it
-//            it.readingItem.each {
-//                println("${user.userName}=====================================${it}")
-//            }
-//
-//        }
-
-//        List<Topic> topics = Topic.findAll()
-//        topics.each {
-//            println it.name
-//        }
-
-//        println(userList.first().getSubscribedTopics())
-        //Question 1 for gorm 2
-//        ResourceSearchCo resourceSearchCo = new ResourceSearchCo(topicId: 1)
-//        List<Resource> resourceList = Resource.search(resourceSearchCo).list()
-//        resourceList.each {
-//            println("---------------------" + it.description)
-//        }
-
-//        println("--------------------------")
-//        println Topic.getTrendingTopic().name
 
     }
 

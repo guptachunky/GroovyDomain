@@ -12,8 +12,9 @@ class TopicController {
 
     def show() {
 
+//        Topic topics = Topic.read()
     }
-
+def search(){}
 
     def invite(Integer id, String emailId) {
 
@@ -48,8 +49,6 @@ class TopicController {
 
 
     }
-
-
 
 
     def join(Integer id) {

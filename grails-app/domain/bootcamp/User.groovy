@@ -26,7 +26,7 @@ class User {
     static constraints = {
 
         emailId(unique: true, email: true, blank: false)
-        userName(blank: false)
+        userName(blank: false,nullable: false)
         lastName(nullable: false, blank: false)
         firstName(nullable: false, blank: false)
         password(nullable: false)

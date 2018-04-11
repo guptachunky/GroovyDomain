@@ -1,6 +1,9 @@
 package commandobject
 
-class SearchCo {
+import grails.validation.Validateable
+
+class SearchCo implements Validateable{
+
     String q
     Integer max
     Integer offset

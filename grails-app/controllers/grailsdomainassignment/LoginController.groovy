@@ -1,6 +1,7 @@
 package grailsdomainassignment
 
 import bootcamp.User
+import org.springframework.context.MessageSource
 import utilities.AppConstants
 
 class LoginController {

@@ -11,14 +11,6 @@ class LinksharingTagLib {
     //static encodeAsForTags = [tagName: [taglib:'html'], otherTagName: [taglib:'none']]
     static namespace = "ls"
 
-    def userImage = { attr, body ->
-
-        if (session.user.photo) {
-            out << " <img class='img-responsive'alt='dummy' height='64' width='64' src='data:image/png;base64,${session.user?.photo.encodeBase64()}'/>"
-
-        } else
-            out << " <img class='img-responsive'alt='dummy' height='64' width='64' src='data:image/png;base64,${session.user?.photo.encodeBase64()}'/>"
-    }
 
     def readLink = { attr, body ->
         Resource resource = Resource.get(attr.read)
@@ -73,20 +65,42 @@ class LinksharingTagLib {
     }
 
 
-    def resourceCount = {
-        attr, body ->
-
-            return Resource.countByTopic(attr.topic)
-    }
-
-
-    def topicCount = {
-        attr, body ->
-            return Topic.countByCreatedBy(session.user)
-    }
-
     def trendingTopics = { attr, body ->
 
 
     }
+
+
+    def inboxSubscriptionCount = { attrs, body ->
+        Topic topic = Topic.findById(attrs.id)
+        out << Subscription.findAllByTopic(topic).size()
+
+    }
+
+    def inboxResourceCount = { attrs, body ->
+        Topic topic = Topic.findById(attrs.id)
+        out << Resource.findAllByTopic(topic).size()
+
+    }
+
+    def resourceCount = { attrs, body ->
+        out << Resource.findAllByTopic(attrs.id).size()
+
+    }
+
+    def topicCount = {
+        out << Topic.findAllByCreatedBy(session.user).size()
+    }
+
+    def userSubscriptionCount = {
+        out << Subscription.findAllByUser(session.user).size()
+    }
+
+    def userImage = { attrs, body ->
+
+        out << "<img src='${createLink(controller: 'user', action: 'fetchUserImage', params: [username: attrs.username])}' " +
+                " height='${attrs.height}' width='${attrs.width}'>"
+    }
+
+
 }

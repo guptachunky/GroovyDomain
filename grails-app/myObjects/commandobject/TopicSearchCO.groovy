@@ -12,4 +12,6 @@ class TopicSearchCO {
     User getUser() {
         return User.get(this.id)
     }
+
+
 }
