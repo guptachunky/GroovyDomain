@@ -9,6 +9,7 @@ class ResourceService {
 
     }
 
+    def search() {}
 
 
 }

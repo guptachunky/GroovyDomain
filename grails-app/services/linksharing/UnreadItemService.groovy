@@ -2,6 +2,7 @@ package linksharing
 
 import DTO.EmailDTO
 import bootcamp.ReadingItem
+import bootcamp.Resource
 import bootcamp.User
 import grails.gorm.transactions.Transactional
 
@@ -40,14 +41,13 @@ class UnreadItemService {
 
     def inbox(User user) {
 
-        List result = []
+        List<Resource> resources = []
 
         List<ReadingItem> readingItemList = ReadingItem.findAllByUserAndIsRead(user, true)
-
-        readingItemList.resource.each { list ->
-            result.add(list)
+        readingItemList.each {
+            resources.add(it.resource)
         }
-
+        return resources
 
     }
 }

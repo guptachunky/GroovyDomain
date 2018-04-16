@@ -27,6 +27,21 @@ class ResourceController {
     def changeIsRead() {
         Resource resource = Resource.get(params.id)
         ReadingItem readingItem = ReadingItem.findByResourceAndUser(resource, session.user)
+        if (readingItem.isRead) {
+            readingItem.isRead = false
+            readingItem.save(flush: true)
+        } else {
+
+            readingItem.isRead = true
+            readingItem.save(flush: true)
+        }
+        redirect(controller: 'login', action: 'index')
+    }
+
+
+    def changeIsSubscribe() {
+        Resource resource = Resource.get(params.id)
+        ReadingItem readingItem = ReadingItem.findByResourceAndUser(resource, session.user)
         if (readingItem) {
             readingItem.isRead = false
             readingItem.save()
@@ -37,12 +52,7 @@ class ResourceController {
         render(view: "/resource/search")
     }
 
-
     def search() {
-
-//        flash.error = "No Search Criteria"
-
-//        render(text: "render")
 
     }
 

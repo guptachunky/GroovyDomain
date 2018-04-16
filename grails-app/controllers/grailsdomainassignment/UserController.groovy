@@ -6,6 +6,7 @@ import bootcamp.Resource
 import bootcamp.Subscription
 import bootcamp.Topic
 import bootcamp.User
+import commandobject.ResourceSearchCo
 import constant.Visibility
 import linksharing.EmailService
 import linksharing.UnreadItemService
@@ -35,31 +36,33 @@ class UserController {
 
     def register(User user) {
 
-
         def file = params.photo
         user.photo = file.bytes
         user.active = true
         user.admin = false
 
-//        if(user.hasErrors()){
-//            user.errors.fieldErrors.join()
-//
-//        }
-
-
-        if (user.save()) {
-
-            flash.message = "Successfully User Stored"
-            session.user = user
+        if (user.password != user.confirmPassword) {
+            flash.error = "password Mismatch"
+            render(view: "/login/index")
         } else {
-            flash.error = "error in register"
-        }
 
+            if (user.save()) {
+
+                flash.message = "Successfully User Stored"
+                session.user = user
+                redirect(controller: 'user', action: 'index')
+            } else {
+                flash.error = "error in register"
+                render(view: "/login/index")
+            }
+
+        }
     }
 
 
     def forgotPassword(String emailId) {
         User user = User.findByEmailId(emailId)
+
         if (user && user.active) {
 
             String newPassword = new Util().getRandomPassword()
@@ -68,16 +71,22 @@ class UserController {
             emailService.sendMail(emailDTO)
 
             flash.message = "password sent"
-            render(" New Password Is Sent To Registered Email Id")
         } else {
-            render("Invalid email id")
+            flash.message = "Error Found"
         }
+        redirect(controller: 'login', action: 'index')
     }
 
 
-    def userProfile() {
+    def profile() {
+        render(view: 'forgotPassword')
 
     }
+
+    def editProfile() {
+
+    }
+
 
     def show(Integer id) {
         Integer myId = (Integer) params.id
@@ -121,12 +130,13 @@ class UserController {
         String confirmNewPassword = params.updatedConfirmPassword
 
         User user = session.user
-        if (userService.changePassword(oldPassword, newPassword, confirmNewPassword,user)) {
-            render(text: "Successfull")
+        if (userService.changePassword(oldPassword, newPassword, confirmNewPassword, user)) {
+            flash.message = "Success"
         } else {
-            render(text: "UnsuccessFull")
+            flash.error = "Error"
         }
 
+        redirect(controller: 'login', action: 'index')
     }
 
 
@@ -139,10 +149,15 @@ class UserController {
         render(text: "failure")
     }
 
-
     def showUserListToAdmin() {
         List<UserVO> allUsers = userService.showAllUsers()
         render(view: '/user/adminView', model: [allUsers: allUsers])
     }
 
+    def changeActiveness() {
+        User user = User.findById(params.id)
+        user.active = !(user.active)
+        user.save(flush: true)
+        redirect(controller: 'admin', action: 'userList')
+    }
 }

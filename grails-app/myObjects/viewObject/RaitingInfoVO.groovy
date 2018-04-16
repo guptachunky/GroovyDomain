@@ -6,6 +6,4 @@ class RaitingInfoVO {
     Long averageScore
     Long totalScore
 
-
-
 }

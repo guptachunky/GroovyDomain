@@ -91,5 +91,9 @@ class Topic {
             false
     }
 
+    static List<Topic> getCreatedTopics(User user) {
+        List<Topic> createdTopics = Topic.findAllByCreatedBy(user)
+        return createdTopics
+    }
 
 }

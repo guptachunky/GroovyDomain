@@ -12,6 +12,38 @@
     <title>${session.user.firstName} Profile</title>
     <meta name="layout" content="main">
 
+
+    <div class="pull-right" style="   margin-left: 30px; margin-top: 5px; ">
+
+        <g:if test="${session.user}">
+
+            <span class="col-lg-3 dropdown">
+
+                <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-user" style="font-size:24px"></i></a>
+                    ${session.user.firstName}
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <g:if test="${session.user.admin}">
+                        <li><g:link controller="admin" action="userList">View All Users</g:link></li>
+                    </g:if>
+                    <li><g:link controller="user" action="editProfile">Edit Profile</g:link></li>
+                    <li><a href="#">Users</a></li>
+                    <li><a href="#">Topic</a></li>
+                    <li><a href="#">Posts</a></li>
+                    <li><g:link controller="login" action="logout">Logout</g:link></li>
+                </ul>
+            </span>
+        </g:if>
+
+    </div>
+
+
+
+
 </head>
 
 <body>
@@ -60,7 +92,7 @@
             <div class="col-lg-12 " style="margin-top: 25px">
 
                 <div class=" panel panel-default  ">
-                    <div class="panel-heading" style="background:#696969">
+                    <div class="panel-heading">
                         <p>
 
                         <h3 style="color:white">Profile</h3></p>
@@ -124,7 +156,7 @@
 
                             <div class="form-group col-lg-10">
                                 <label>New Password*</label>
-                                <input class="form-control" type="password" name="updatedPassword">
+                                <input class="form-control" type="text" name="updatedPassword">
                             </div>
 
                             <div class="form-group col-lg-10">

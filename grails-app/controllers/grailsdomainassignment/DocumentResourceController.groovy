@@ -1,19 +1,15 @@
 package grailsdomainassignment
 
-class DocumentResourceController {
+import linksharing.ResourceService
 
-//    ResourceService resourceService
+class DocumentResourceController extends ResourceController {
+
+    ResourceService resourceService
 
     def index() {}
 
     def save() {
         params.createdBy = session.user
 
-//        if (resourceService.saveDocumentResource(params)) {
-//            flash.message = "DOCUMENT RESOURCE SAVED"
-//        } else {
-//            flash.message = "ERROR"
-//        }
-//        redirect(controller: 'user', action: 'index')
     }
 }

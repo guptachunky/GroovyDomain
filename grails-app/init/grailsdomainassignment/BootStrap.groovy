@@ -17,6 +17,12 @@ class BootStrap {
 
     def init = { servletContext ->
 
+
+        Resource resource=Resource.get(1)
+
+
+
+
         println AppConstants.PASSWORD
         addNormalAndAdmin()
         createTopic()

@@ -27,8 +27,9 @@
                     <i class="fa fa-facebook-official fa-lg" aria-hidden="true"></i>
                     <i class="fa fa-google fa-lg" aria-hidden="true"></i>
                     <i class="fa fa-twitter fa-lg" aria-hidden="true"></i>
-                    <span class="pull-right" style="margin-right: 0px;color: #007efc"><a href="#"
-                                                                                         style="color: #007efc;font-size: small">View Topic</a>
+                    <span class="pull-right" style="margin-right: 0px;color: #007efc">
+                        <g:link controller="topic" action="show"
+                                id="${recentShares.topic.id}">view Topic</g:link>
                     </span>
                 </div>
                 <hr>

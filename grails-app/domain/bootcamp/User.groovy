@@ -26,7 +26,7 @@ class User {
     static constraints = {
 
         emailId(unique: true, email: true, blank: false)
-        userName(blank: false,nullable: false)
+        userName(blank: false, nullable: false)
         lastName(nullable: false, blank: false)
         firstName(nullable: false, blank: false)
         password(nullable: false)
@@ -55,6 +55,7 @@ class User {
         return "User = ${userName}"
     }
 
+
     List getUnreadResource(SearchCO searchCO) {
 
         if (searchCO.q) {
@@ -78,14 +79,13 @@ class User {
     }
 
 
-    List getSubscribedTopics() {
+    List<Topic> getSubscribedTopics() {
         List<Topic> subscribedTopics = []
-        this.subscriptions.each {
+        subscriptions.each {
             if (!(it.topic.createdBy == it.user)) {
                 subscribedTopics.add(it.topic)
             }
         }
-
         return subscribedTopics
     }
 
@@ -112,6 +112,7 @@ class User {
         RatingResource ratingResource = RatingResource.findByUserAndResource(this, resource: resource)
         return ratingResource.score
     }
+
 
     static Boolean isSubscribed(Topic topic) {
         List<User> userList = []

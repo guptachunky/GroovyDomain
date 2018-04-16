@@ -1,0 +1,4 @@
+package commandobject
+
+class InboxVO {
+}

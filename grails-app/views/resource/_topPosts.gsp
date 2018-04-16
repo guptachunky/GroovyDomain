@@ -4,12 +4,6 @@
         <h3 style="color:white " class="col-lg-8">Top Posts</h3>
 
 
-        <select name="time" class=" col-lg-3 " style=" margin-top: 25px">
-            <option value="today">Today</option>
-            <option value="1 week">1 Week</option>
-            <option value="1 month">1 Month</option>
-            <option value="1 year">1 Year</option>
-        </select>
 
     </div>
 
@@ -35,8 +29,9 @@
                     <i class="fa fa-facebook-official fa-lg" aria-hidden="true"></i>
                     <i class="fa fa-google fa-lg" aria-hidden="true"></i>
                     <i class="fa fa-twitter fa-lg" aria-hidden="true"></i>
-                    <span class="pull-right" style="margin-right: 0px;color: #007efc"><a href="#"
-                                                                                         style="color: #007efc;font-size: small">View Topic</a>
+                    <span class="pull-right" style="margin-right: 0px;color: #007efc">
+                        <g:link controller="topic" action="show"
+                                id="${topPosts.topic.id}">view Topic</g:link>
                     </span>
 
                 </div>

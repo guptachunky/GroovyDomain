@@ -23,7 +23,6 @@ class LinksharingTagLib {
             value = "Mark As Read"
 
         }
-//        String value = session.user ? "Mark as Read" : "Mark As Unread"
 
         out << value
     }

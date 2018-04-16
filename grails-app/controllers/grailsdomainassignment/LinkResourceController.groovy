@@ -3,7 +3,7 @@ package grailsdomainassignment
 import bootcamp.LinkResource
 import bootcamp.Resource
 
-class LinkResourceController {
+class LinkResourceController extends ResourceController {
 
     def index() {}
 

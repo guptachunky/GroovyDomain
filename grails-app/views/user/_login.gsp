@@ -1,7 +1,3 @@
-<div class="modal fade" id="forgotPassword" role="dialog">
-    <g:render template="/user/ForgotPassword"/>
-</div>
-
 <g:form class="form-horizontal" controller="login"
         action="loginHandler">
     <div class="form-group">
@@ -24,7 +20,7 @@
 
     <div class="form-group">
         <div class="col-sm-5">
-            <a href="#forgotPassword" data-toggle="modal" aria-hidden="true">forgot Password</a>
+            <a href="/grails-app/user/profile" data-toggle="modal" aria-hidden="true">forgot Password</a>
         </div>
 
         <div class="col-sm-5">
@@ -33,3 +29,5 @@
         </div>
     </div>
 </g:form>
+
+

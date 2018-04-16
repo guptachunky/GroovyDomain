@@ -1,8 +1,10 @@
 package grailsdomainassignment
 
+import DTO.EmailDTO
 import bootcamp.User
 import org.springframework.context.MessageSource
 import utilities.AppConstants
+import utilities.Util
 
 class LoginController {
 
@@ -15,6 +17,8 @@ class LoginController {
 //            render(view: 'index')
 //        }
     }
+
+
 
     def loginHandler(String userName, String password) {
         User user = User.findByUserNameAndPassword(userName, password)

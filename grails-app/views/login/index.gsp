@@ -48,6 +48,7 @@
                 <h3 style="color:white">Login</h3>
             </p>
             </div>
+
             <div class="panel-body">
 
                 <g:render template="/user/login"></g:render>

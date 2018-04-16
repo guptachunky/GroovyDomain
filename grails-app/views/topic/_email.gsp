@@ -1,3 +1,4 @@
+<%@ page import="bootcamp.Topic" %>
 <div class="container col-sm-12">
     <div class="row">
 
@@ -14,52 +15,34 @@
 
                 <div class="panel">
                     <div class="panel-body">
+                        <g:form controller="topic" action="invite" method="post">
+                            <div class="form-group" >
+                        <div class="form-group col-lg-10">
+                        <label class="control-label col-sm-2">Email:</label>
 
-                        <div class="col-sm-12">
-                            <div class="col-sm-4">
-                                <div>
-                                    <h4>Email*</h4>
-                                </div>
-                                <br>
+                        <div class="col-sm-10">
+                        <input class="form-control" type="email" name="to" placeholder="enter the email of the recepient">
 
-                                <div>
-                                    <h4>Topic*</h4>
-                                </div>
-                                <br>
-
-                            </div>
-
-                            <div class="col-sm-8">
-                                <div>
-                                    <input type="text" style="width: 100%" placeholder="Email"></textarea>
-                                </div>
-                                <br>
-
-                                <div>
-                                    <select style="width: 100%;height: 100%;">
-                                        <option>Topic</option>
-                                        <option>Link</option>
-                                    </select>
-
-                                </div>
-                                <br>
-
-                                <div class="col-sm-12">
-                                    <div class="col-sm-6">
-
-                                        <button class="btn btn-primary ">Invite</button>
-
-                                        <button class="btn btn-primary pull-right">Cancel</button>
-                                    </div>
-                                </div>
-
-                            </div>
                         </div>
-                    </div>
-                </div>
+                        </div>
+                        <span class="caret"></span>
 
+                            <g:select name="topic" optionKey="id" optionValue="name"
+                                      from="${session.user.getSubscribedTopics()}"/>
+                            <br>
+
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    <g:submitButton name="Share" value="Invite">Invite</g:submitButton>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                </div>
+                            </div>
+                        </g:form>
+                    </div>
+                    </div>
+
+                </div>
             </div>
         </div>
     </div>
 </div>
-
